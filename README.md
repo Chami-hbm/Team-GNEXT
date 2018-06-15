@@ -1,6 +1,6 @@
 # Team GNext - Stock Market Simulation Web App #
 
-### Reository details ###
+### Repository details ###
 
 * Team GNext - Stock Market Simulation Web App
 * Version : 1.0.0
