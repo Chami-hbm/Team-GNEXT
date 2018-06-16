@@ -24,4 +24,4 @@
 | S.S.Samarajeewa           | 16211153          | Development & Testing          |
 | H.R.Rangika DeSilva       | 16211309          | Development & Testing          |
 | H.M.C.H.Wickramarathne    | 14209063          | Development & Testing          |
-| ChamikaSKManathunga       | 16211243          | Development                    |
+| Chamika S.K.Manathunga    | 16211243          | Development                    |
