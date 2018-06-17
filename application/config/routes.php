@@ -6,10 +6,11 @@ $route['404_override'] = 'home/error404';
 //------------------------ player -------------------------------
 //--------------------------------------------------------------------
 
-$route['login'] = "player/player_home/login";
-$route['login-check'] = "player/player_home/login_check";
+$route['login'] = "home/login";
+$route['login-check'] = "home/login_check";
+$route['register'] = "home/register";
+$route['logout'] = "home/logout";
 
-$route['player/logout'] = "player/player_home/logout";
 $route['players/dashboard'] = 'player/players/dashboard';
 
 

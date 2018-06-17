@@ -1,19 +1,19 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_controller {
-
+    var $data;
+    
     function __construct(){
         parent::__construct();
         $this->load->model('mlogin');
+        $this->data = array(
+            'site_name' => $this->config->item('site_name'),
+            'title' => $this->config->item('site_name').' - Login',
+        );
     }
 
     public function login(){
-        
-        $data = array(
-            'site_name' => $this->config->item('site_name'),            
-            'company_name' => $this->config->item('company_name'),
-            'title' => $this->config->item('site_name').' - Login',
-        );
+        $data = $this->data;
 
         $this->load->view('includes/v_include_header', $data);
         $this->load->view('admin/vlogin');
@@ -36,6 +36,14 @@ class Home extends CI_controller {
             $this->nativesession->set('Invalid_login',TRUE);
             redirect(base_url().'login');
         }
+    }
+    
+    public function register(){
+        $data = $this->data;
+
+        $this->load->view('includes/v_include_header', $data);
+        $this->load->view('admin/vregister');
+        $this->load->view('includes/v_include_footer');
     }
 
 }
