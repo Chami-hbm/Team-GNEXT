@@ -11,7 +11,7 @@
     </center>
     <div class="row" style="margin-top: 20px">
         <div class="col-md-4 col-md-offset-4">
-            <form action="<?php echo base_url("player/login-check"); ?>" class="form-horizontal" id="validate-form" method="post">
+            <form action="<?php echo base_url("login-check"); ?>" class="form-horizontal" id="validate-form" method="post">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
                 <div class="panel panel-default">
@@ -27,7 +27,7 @@
                                     <span class="input-group-addon">
                                         <i class="ti ti-user"></i>
                                     </span>
-                                    <input class="form-control" placeholder="Email" id="username" name="username" type="email" required="required">
+                                    <input class="form-control" placeholder="Email" id="email" name="email" type="email" required="required">
                                 </div>
                             </div>
                         </div>

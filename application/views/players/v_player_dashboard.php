@@ -5,18 +5,6 @@
         <div class="static-content-wrapper">
             <div class="static-content">
                 <div class="page-content">
-<!--                    <ol class="breadcrumb">
-                        <li class=""><a href="<?php echo base_url('player/inventory'); ?>">Home</a></li>
-                        <li class="active"><a href="#">Banks</a></li>
-                    </ol>
-
-                    <div class="page-heading">
-                        <h1>Banks
-                            <small>Manage Banks</small>
-                        </h1>
-
-                        <div class="options"></div>
-                    </div>-->
 
                     <div class="container-fluid">
                         <div class="row">
@@ -61,7 +49,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-7">
-                                                <div class="form-group main_div hide" id="play_game_main_div">
+                                                <div class="form-group main_div" id="play_game_main_div">
                                                     <div class="panel panel-info">
                                                         <div class="panel-heading">
                                                             <h4 class="center">Play Game</h4>
