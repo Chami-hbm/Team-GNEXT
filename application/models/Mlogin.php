@@ -64,5 +64,30 @@ class Mlogin extends CI_Model
     public function player_password_get()    {
         return $this->session->userdata('password');
     }
+    
+    /* Registration */
+    public function register($data) {
+        if ($data['user_type'] == 'broker') {
+            $data['account_no'] = $this->get_user_account_no();
+        }
+        var_dump($data);
+//        $this->db->insert('user', $data);
+    }
+    
+    private function get_user_account_no() {
+        $account_no = rand(10000000, 99999999);
+    
+        $this->db->from('users');
+        $this->db->where('account_no', $account_no);
+        $query = $this->db->get();
+    
+        $result = $query->result_array();
+    
+        if (empty($result)) {
+            return $account_no;
+        }else{
+            return rand(10000000, 99999999);
+        }
+    }
 }
 
