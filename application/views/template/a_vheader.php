@@ -20,7 +20,7 @@ if(isset($usertype)) {
             <!--		    <img class="img-white" alt="Paper" src="--><?php //echo base_url(); ?><!--assets/img/logo-white.png">-->
             <h3 class="text-center"><?php echo $usertype; ?></h3>
             <img class="img-dark" alt="Paper" src="<?php echo base_url(); ?>assets/img/logo-dark.png">
-            <!--<img src="<?php echo base_url(); ?>assets/img/logo-kalyt.png" class="img-responsive"/>-->
+            <!--<img src="<?php echo base_url(); ?>assets/img/gnext-logo.png" class="img-responsive"/>-->
         </a>
         
         <?php //
