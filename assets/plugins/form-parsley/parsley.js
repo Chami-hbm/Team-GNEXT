@@ -117,9 +117,9 @@
     // Could also be (and given directly from DOM) a valid selector like `'#div'`
     errorsContainer: function (ParsleyField) {},
     // ul elem that would receive errors' list
-    errorsWrapper: '<ul class="parsley-errors-list"></ul>',
+    errorsWrapper: '<p class="parsley-error-text"></p>',
     // li elem that would receive error message
-    errorTemplate: '<li></li>'
+    errorTemplate: '<span></span>'
   };
 
   var ParsleyAbstract = function() {};
@@ -1410,7 +1410,7 @@
     },
     _errorClass: function (fieldInstance) {
       fieldInstance._ui.validationInformationVisible = true;
-      fieldInstance._ui.$errorClassHandler.removeClass(fieldInstance.options.successClass).addClass(fieldInstance.options.errorClass);
+      fieldInstance._ui.$errorClassHandler.removeClass(fieldInstance.options.successClass).addClass(fieldInstance.options.errorClass).closest('.form-group').addClass('has-error');
     },
     _resetClass: function (fieldInstance) {
       fieldInstance._ui.$errorClassHandler.removeClass(fieldInstance.options.successClass).removeClass(fieldInstance.options.errorClass);
@@ -1879,7 +1879,7 @@ window.ParsleyConfig.i18n.en = $.extend(window.ParsleyConfig.i18n.en || {}, {
     alphanum:     "This value should be alphanumeric."
   },
   notblank:       "This value should not be blank.",
-  required:       "This value is required.",
+  required:       "This field is required.",
   pattern:        "This value seems to be invalid.",
   min:            "This value should be greater than or equal to %s.",
   max:            "This value should be lower than or equal to %s.",

@@ -9,6 +9,7 @@ $route['404_override'] = 'home/error404';
 $route['login'] = "home/login";
 $route['login-check'] = "home/login_check";
 $route['register'] = "home/register";
+$route['register/save'] = "home/register_save";
 $route['logout'] = "home/logout";
 
 //Players

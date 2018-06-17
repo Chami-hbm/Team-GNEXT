@@ -1083,3 +1083,8 @@ input.input-has-error, select.input-has-error{
 .form-group {
     margin: 10px 0 0 0!important;
 }
+
+.parsley-error-text {
+    color: #f00;
+    margin-bottom: 0;
+}
