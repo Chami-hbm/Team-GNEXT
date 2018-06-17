@@ -6,10 +6,10 @@ class Mlogin extends CI_Model
     }
 
     function login($login) {
-        $this->db->where('email', $login['email']);
+        $this->db->where('email', $login['username']);
         $this->db->where('password',hash('sha512', $login['password']));
         $query = $this->db->get('users');
-        var_dump($this->db->last_query());
+        
         if(count($query->result_array())==1){
             $row=  $query->row();
             $data = array(
@@ -17,7 +17,7 @@ class Mlogin extends CI_Model
 //                            'password' => $row->password_not_hashed,
                             'name' => $row->name,
                             'email' => $row->email,
-                            'user_type' => $row->user_type,
+                            'usertype' => $row->user_type,
                             'loggedin' => TRUE,
                     );
             
