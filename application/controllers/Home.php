@@ -16,7 +16,7 @@ class Home extends CI_controller {
         $data = $this->data;
 
         $this->load->view('includes/v_include_header', $data);
-        $this->load->view('admin/vlogin');
+        $this->load->view('vlogin');
         $this->load->view('includes/v_include_footer');
     }
     
@@ -42,7 +42,7 @@ class Home extends CI_controller {
         $data = $this->data;
 
         $this->load->view('includes/v_include_header', $data);
-        $this->load->view('admin/vregister');
+        $this->load->view('vregister');
         $this->load->view('includes/v_include_footer');
     }
 
