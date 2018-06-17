@@ -67,6 +67,7 @@
 <script src="<?php echo base_url(); ?>assets/plugins/form-select2/select2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/form-validation/jquery.validate.min.js"></script>
 
+<script src="<?php echo base_url('assets/plugins/form-parsley/parsley.js'); ?>"></script>
     <!-- End loading page level scripts-->
     
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
