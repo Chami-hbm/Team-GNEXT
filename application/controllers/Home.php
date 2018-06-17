@@ -26,14 +26,16 @@ class Home extends CI_controller {
         $login['email']= $this->input->post('email');
         $login['password']= $this->input->post('password');
         
-        $login_status=$this->madmin->login($login);
+        $login_status=$this->mlogin->login($login);
         
         if($login_status){
-            $this->nativesession->set('Invalid_login',FALSE);
-            redirect(base_url().'');
+            if($this->session->userdata('user_type')=="players"){
+                redirect(base_url().$this->session->userdata('user_type').'/play-game');
+            }else{
+                redirect(base_url().$this->session->userdata('user_type').'/view-portfolio');
+            }
 //             echo $this->session->userdata('usertype');
         }else{
-            $this->nativesession->set('Invalid_login',TRUE);
             redirect(base_url().'login');
         }
     }

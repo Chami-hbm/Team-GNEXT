@@ -3,7 +3,7 @@
 $route['default_controller'] = "home/login";
 $route['404_override'] = 'home/error404';
 
-//------------------------ player -------------------------------
+//------------------------ players -------------------------------
 //--------------------------------------------------------------------
 
 $route['login'] = "home/login";
@@ -11,7 +11,16 @@ $route['login-check'] = "home/login_check";
 $route['register'] = "home/register";
 $route['logout'] = "home/logout";
 
-$route['players/dashboard'] = 'player/players/dashboard';
+//Players
+$route['players/play-game'] = 'players/play_game';
+$route['players/get-analyst'] = 'players/get_analyst';
+$route['players/view-bank-balance'] = 'players/view-bank-balance';
+$route['players/view-stock-portfolio'] = 'players/view-stock-portfolio';
+$route['players/view-current-historical-price-shares'] = 'players/view-current-historical-price-shares';
+
+
+//Brokers
+$route['brokers/view-portfolio'] = 'brokers/view_portfolio';
 
 
 
