@@ -13,15 +13,18 @@ $route['register/save'] = "home/register_save";
 $route['logout'] = "home/logout";
 
 //Players
-$route['players/play-game'] = 'players/play_game';
-$route['players/get-analyst'] = 'players/get_analyst';
-$route['players/view-bank-balance'] = 'players/view-bank-balance';
-$route['players/view-stock-portfolio'] = 'players/view-stock-portfolio';
-$route['players/view-current-historical-price-shares'] = 'players/view-current-historical-price-shares';
+$route['players/play-game'] = 'players/players_play_game/index';
+$route['players/get-analyst'] = 'players/players/get_analyst';
+$route['players/view-bank-balance'] = 'players/players/view_bank_balance';
+$route['players/view-stock-portfolio'] = 'players/players_portfolio/index';
+$route['players/view-current-historical-price-shares'] = 'players/players_historical_price/index';
 
 
 //Brokers
-$route['brokers/view-portfolio'] = 'brokers/view_portfolio';
+$route['brokers/view-portfolio'] = 'brokers/brokers/view_portfolio';
+$route['brokers/players-transactions'] = 'brokers/brokers_transactions/index';
+$route['brokers/stock-management'] = 'brokers/brokers_stock/index';
+$route['brokers/view-price-of-stock'] = 'brokers/brokers_historical_price/index';
 
 
 
