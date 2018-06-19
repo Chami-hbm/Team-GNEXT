@@ -1,11 +1,11 @@
 <?php
 if(isset($usertype)) {
     
-    if($usertype === "Player") {
+    if($usertype === "players") {
         $dashboard_url = base_url() . 'player/inventory/dashboard';
         $logout_url = base_url() . 'player/logout';
     }
-    if($usertype === "Broker") {
+    if($usertype === "brokers") {
         $dashboard_url = base_url() . 'broker';
         $logout_url = base_url() . 'broker/logout';
     }
