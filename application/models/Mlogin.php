@@ -9,7 +9,6 @@ class Mlogin extends CI_Model
         $this->db->where('email', $login['email']);
         $this->db->where('password',hash('sha512', $login['password']));
         $query = $this->db->get('users');
-        var_dump($this->db->last_query());
         if(count($query->result_array())==1){
             $row=  $query->row();
             $data = array(
@@ -33,8 +32,6 @@ class Mlogin extends CI_Model
         
     }
     
-    
-    
     public function loggedin (){        
         if($this->session->userdata('loggedin')){
             return $this->session->userdata('loggedin');
@@ -43,8 +40,6 @@ class Mlogin extends CI_Model
             return FALSE;            
         }
     }
-
-    
 
     public function logout ()    {
         $this->session->sess_destroy();
@@ -65,29 +60,19 @@ class Mlogin extends CI_Model
         return $this->session->userdata('password');
     }
     
-    /* Registration */
+    
+    /**
+     * @param $data
+     * Registration
+     */
     public function register($data) {
-        if ($data['user_type'] == 'broker') {
-            $data['account_no'] = $this->get_user_account_no();
-        }
-        var_dump($data);
-//        $this->db->insert('user', $data);
-    }
-    
-    private function get_user_account_no() {
-        $account_no = rand(10000000, 99999999);
-    
-        $this->db->from('users');
-        $this->db->where('account_no', $account_no);
-        $query = $this->db->get();
-    
-        $result = $query->result_array();
-    
-        if (empty($result)) {
-            return $account_no;
+        if($data['user_type'] == 'brokers') {
+            $this->db->where('user_id', $data['user_id']);
+            $this->db->update('users', $data);
         }else{
-            return rand(10000000, 99999999);
+            $this->db->insert('users', $data);
         }
+        
     }
 }
 
