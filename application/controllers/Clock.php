@@ -17,7 +17,7 @@ class Clock extends CI_controller
         $data = $this->data;
         
         $this->load->view('includes/v_include_header', $data);
-        $this->load->view('vlogin');
+        $this->load->view('vclock');
         $this->load->view('includes/v_include_footer');
     }
 }
