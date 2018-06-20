@@ -19,6 +19,9 @@ $route['players/view-bank-balance'] = 'players/players/view_bank_balance';
 $route['players/view-stock-portfolio'] = 'players/players_portfolio/index';
 $route['players/view-current-historical-price-shares'] = 'players/players_historical_price/index';
 
+//Players Stocks
+$route['players/stocks/buy/save'] = 'players/players_stocks/save_buy';
+
 
 //Brokers
 $route['brokers/view-portfolio'] = 'brokers/brokers/view_portfolio';
