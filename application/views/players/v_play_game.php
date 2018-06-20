@@ -156,39 +156,48 @@
 
 
 <div class="modal fade" id="buy_stock" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title center" id="myModalLabel"><b>Should load all available shares in the market to
-                        the grid from stock file</b></h4>
+<!--                <h4 class="modal-title center" id="myModalLabel"><b>Should load all available shares in the market to
+                        the grid from stock file</b></h4>-->
             </div>
-            <form action="<?php echo base_url('player/inventory/banks/delete'); ?>" method="post"
+            <form action="<?php echo base_url('players/stocks/buy/save'); ?>" method="post"
                   class="form-horizontal">
                 <div class="modal-body">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Enter Stock ID</label>
+                            <label class="control-label col-sm-4">Select the Stock</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <select name="company_stocks_company_stock_id" id="company_stocks_company_stock_id" class="form-control select-box" data-placeholder="Select Company" title="Select Company" required>
+                                    <option value="" selected disabled>Select the Stock</option>
+                                    <?php
+                                    if (isset($stocks)) {
+                                        foreach ($stocks as $row) {
+                                            echo '<option value="' . $row['company_stock_id'] . '" data-price="' . $row['price'] . '">' . $row['company_name'] . ' | ' . $row['company_stock_name'] . ' | ' . $row['quantity'] . ' | ' . $row['price'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">Quantity to be buying</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="number" class="form-control" id="quantity" name="quantity" onchange="price_calculation(this.value)" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label bold col-sm-4"><b>Total cost of your Buying is</b></label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control"  id="total" name="total" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-3"></div>
-                            <button type="button" class="btn btn-info">Buy</button>
+                            <button type="submit" class="btn btn-info" disabled id="buy_stock_submit">Buy</button>
                             <button type="button" data-dismiss="modal" class="btn ">Cancel</button>
                         </div>
                     </div>
@@ -207,7 +216,7 @@
                 <h4 class="modal-title center" id="myModalLabel"><b> Should load all current shares in hand of the
                         player from player’s stock file </b></h4>
             </div>
-            <form action="<?php echo base_url('player/inventory/banks/delete'); ?>" method="post"
+            <form action="<?php echo base_url('players/stocks/sell/save'); ?>" method="post"
                   class="form-horizontal">
                 <div class="modal-body">
                     <div class="col-sm-12">
@@ -247,3 +256,15 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function price_calculation($quantity) {
+        quantity=$quantity;
+        price=parseFloat($('#company_stocks_company_stock_id option:selected').data('price'));
+        total=(parseFloat(quantity*price)).toFixed(2);
+        
+        $("#total").val(total);
+        $("#buy_stock_submit").removeAttr('disabled');
+    }
+</script>
