@@ -67,6 +67,11 @@ if(isset($styles)){
     });
 </script>
 
+<script src="<?php echo base_url(); ?>assets/js/easytimer.min.js"></script>
+<script>
+    var timerInstance = new Timer();
+</script>
+
     </head>
     <body class="<?php if(isset($form_class)){ echo $form_class; } ?> animated-content">
     <!--<body class="<?php if(isset($form_class)){ echo $form_class; } ?> animated-content sidebar-collapsed">-->
