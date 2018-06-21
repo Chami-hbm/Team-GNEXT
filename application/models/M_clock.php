@@ -37,7 +37,7 @@ class M_clock extends CI_Model {
         }
     }
 
-    public function random_trend($value) {
+    public function random_trend() {
         $this->db->select('*');
         $this->db->where('type', 'sell');
         $query  = $this->db->get('company_stocks');
