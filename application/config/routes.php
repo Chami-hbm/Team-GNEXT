@@ -32,4 +32,11 @@ $route['brokers/view-price-of-stock'] = 'brokers/brokers_historical_price/index'
 
 
 
+
+//Clock
+$route['clock/change-prices-per-turn'] = "clock/change_prices_per_turn";
+
+
+
+
 $route['translate_uri_dashes'] = FALSE;
