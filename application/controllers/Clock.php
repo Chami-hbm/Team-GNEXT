@@ -21,7 +21,9 @@ class Clock extends CI_controller
         $this->load->view('includes/v_include_footer');
     }
     
-    public function change_prices_per_turn() {
+    public function new_turn() {
+        $this->m_clock->increase_turn();
+        
         $turn = $this->m_clock->get_current_turn();
         
         $this->sector_trend("IT");
@@ -30,6 +32,9 @@ class Clock extends CI_controller
         if($turn==5){
             $this->event_trend();        
         }
+    }
+    public function reset_turns() {
+        $this->m_clock->reset_turns();
     }
     
     public function sector_trend($sector) {
@@ -41,7 +46,7 @@ class Clock extends CI_controller
         }else{
             $value=$positive_value;            
         }
-        $this->M_clock->sector_trend($sector,$value);
+        $this->m_clock->sector_trend($sector,$value);
     }
     
     public function random_trend() {
