@@ -46,7 +46,7 @@ class Clock extends CI_controller
     
     public function random_trend() {
         //Random Trend
-        $this->m_clock->random_trend($value);
+        $this->m_clock->random_trend();
     }
     
     public function general_trend() {
