@@ -13,6 +13,12 @@ class M_clock extends CI_Model {
         return $this->db->get('clock')->result_array()[0]['current_turn'];
     }
     
+    public function increase_turn() {
+        $this->db->set('current_turn', 'current_turn+1', FALSE);
+        $this->db->where('clock_id', 1);
+        $this->db->update('clock', $data);
+    }
+    
     public function sector_trend($sector,$value) {
         $this->db->select('*');
         $this->db->where('company_sector', $sector);
@@ -53,7 +59,6 @@ class M_clock extends CI_Model {
             }
             
             $data = array(
-                    'previous_price' => $row['price'],
                     'price' => $row['price']+($value),
             );                
             $this->db->where('company_stock_id', $row['company_stock_id']);
@@ -69,7 +74,6 @@ class M_clock extends CI_Model {
 
         foreach ($stock_set as $row) {
             $data = array(
-                    'previous_price' => $row['price'],
                     'price' => $row['price']+($value),
             );                
             $this->db->where('company_stock_id', $row['company_stock_id']);
@@ -85,7 +89,6 @@ class M_clock extends CI_Model {
 
         foreach ($stock_set as $row) {
             $data = array(
-                    'previous_price' => $row['price'],
                     'price' => $row['price']+($value),
             );                
             $this->db->where('company_stock_id', $row['company_stock_id']);
