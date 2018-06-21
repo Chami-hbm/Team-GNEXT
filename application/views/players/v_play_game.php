@@ -24,7 +24,6 @@
                                                     <div class="panel-heading">
                                                         <h4 class="center">Play Game</h4>
                                                     </div>
-
                                                     <div class="panel-body">
                                                         <div class="row">
                                                             <div class="col-sm-5">
@@ -164,8 +163,7 @@
 <!--                <h4 class="modal-title center" id="myModalLabel"><b>Should load all available shares in the market to
                         the grid from stock file</b></h4>-->
             </div>
-            <form action="<?php echo base_url('players/stocks/buy/save'); ?>" method="post"
-                  class="form-horizontal">
+            <form action="<?php echo base_url('players/stocks/buy/save'); ?>" method="post" class="form-horizontal">
                 <div class="modal-body">
                     <div class="col-sm-12">
                         <div class="form-group">
@@ -179,6 +177,7 @@
                                             echo '<option value="' . $row['company_stock_id'] . '" data-price="' . $row['price'] . '">' . $row['company_name'] . ' | ' . $row['company_stock_name'] . ' | ' . $row['quantity'] . ' | ' . $row['price'] . '</option>';
                                         }
                                     }
+                                    
                                     ?>
                                 </select>
                             </div>
@@ -194,6 +193,7 @@
                             <div class="col-sm-8">
                                 <input type="text" class="form-control"  id="total" name="total" readonly="readonly">
                             </div>
+                            <input type="hidden" id="price" name="price" >
                         </div>
                         <div class="form-group">
                             <div class="col-sm-3"></div>
@@ -265,6 +265,7 @@
         total=(parseFloat(quantity*price)).toFixed(2);
         
         $("#total").val(total);
+        $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
         $("#buy_stock_submit").removeAttr('disabled');
     }
 </script>
