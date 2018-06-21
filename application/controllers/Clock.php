@@ -6,7 +6,7 @@ class Clock extends CI_controller
     
     function __construct() {
         parent::__construct();
-        $this->load->model('mclock');
+        $this->load->model('m_clock');
         $this->data = array(
             'site_name' => $this->config->item('site_name'),
             'title' => $this->config->item('site_name') . ' - Login',
@@ -22,7 +22,7 @@ class Clock extends CI_controller
     }
     
     public function change_prices_per_turn() {
-        $turn = $this->mclock->get_current_turn();
+        $turn = $this->m_clock->get_current_turn();
         
         $this->sector_trend("IT");
         $this->random_trend();        
@@ -41,12 +41,12 @@ class Clock extends CI_controller
         }else{
             $value=$positive_value;            
         }
-        $this->mclock->sector_trend($sector,$value);
+        $this->M_clock->sector_trend($sector,$value);
     }
     
     public function random_trend() {
         //Random Trend
-        $this->mclock->random_trend($value);
+        $this->m_clock->random_trend($value);
     }
     
     public function general_trend() {
@@ -58,7 +58,7 @@ class Clock extends CI_controller
         }else{
             $value=$positive_value;            
         }
-        $this->mclock->general_trend($value);
+        $this->m_clock->general_trend($value);
     }
     
     public function event_trend() {
@@ -70,7 +70,7 @@ class Clock extends CI_controller
         }else{
             $value=$positive_value;            
         }
-        $this->mclock->general_trend($value);
+        $this->m_clock->general_trend($value);
     }
     
     

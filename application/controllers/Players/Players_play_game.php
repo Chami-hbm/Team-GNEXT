@@ -11,12 +11,12 @@ class Players_play_game extends User_controller{
             'title' => 'Players | Play Game - ' . $this->config->item('site_name'),
             'usertype' => "players",
         );
-        $this->load->model('mstocks');
+        $this->load->model('m_company_stock');
     }
     
     public function index(){
         $data=$this->data;
-        $data['stocks'] = $this->mstocks->get_stocks();
+        $data['stocks'] = $this->m_company_stock->get_stocks();
         
         $data['scripts'][0]['src'] = base_url() . "assets/plugins/form-validation/jquery.validate.min.js";
     

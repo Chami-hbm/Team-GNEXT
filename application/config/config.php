@@ -498,6 +498,7 @@ $config['csrf_exclude_uris'] = array(
     'register/save',
     'player/inventory/task/complete/(:num)',
     'player/inventory/task/delete/(:num)',
+    'players/stocks/buy/save',
 );
 
 /*

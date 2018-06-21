@@ -11,7 +11,11 @@ class Players_stock extends User_controller{
             'title' => 'Players | Stock - ' . $this->config->item('site_name'),
             'usertype' => "players",
         );
-        $this->load->model('mstocks');
+        $this->load->model('m_company_stock');
+        $this->load->model('m_player_stock');
+        $this->load->model('m_stock_transaction');
+        $this->load->model('m_clock');
+        $this->load->model('m_bank_transaction');
     }
     
     public function index(){
@@ -27,21 +31,32 @@ class Players_stock extends User_controller{
     }
     
     public function save_buy() {
-        $user_data['company_stocks_company_stock_id'] = $this->input->post('company_stocks_company_stock_id');
-        $user_data['users_user_id'] = ;
-        $user_data['email'] = $this->input->post('email');
-        $user_data['password'] = hash('sha512', $this->input->post('password'));
-        $user_data['password_not_hashed'] = $this->input->post('password');
+        $player_stock['company_stocks_company_stock_id']=  $this->input->post('company_stocks_company_stock_id');
+        $player_stock['users_user_id']=  $this->session->userdata['user_id'];
+        $player_stock['quantity']=  $this->input->post('quantity');
+        $player_stock['price']=  $this->input->post('price');
         
-        if ($user_data['user_type'] === 'players') {
-            $user_data['player_type'] = $this->input->post('player_type');
-            $user_data['current_balance'] = $this->input->post('initial_balance');
-        } elseif ($user_data['user_type'] === 'brokers') {
-            $user_data['user_id'] = $this->input->post('company');
-        }
+        $player_stock_id=$this->m_player_stock->save_buy($player_stock);
+        $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'],$player_stock['quantity']);
+        
+        $turn=  $this->m_clock->get_current_turn();
+        
+        $stock_transaction['turn']=  $turn;
+        $stock_transaction['type']=  'Buy';
+        $stock_transaction['price']=  $player_stock['price'];
+        $stock_transaction['player_stocks_player_stock_id']=  $player_stock_id;
+        $stock_transaction['company_stocks_company_stock_id']=  $player_stock['company_stocks_company_stock_id'];
+        $stock_transaction['quantity']=  $player_stock['quantity'];
+        $this->m_stock_transaction->save_transaction($stock_transaction);
+        
+        $receiver=  $this->m_company_stock->get_broker_by_stock_id($player_stock['company_stocks_company_stock_id']);
+        $bank_transaction['turn']= $turn;
+        $bank_transaction['type']='Withdraw';
+        $bank_transaction['amount']= $this->input->post('total');
+        $bank_transaction['users_user_id']=$player_stock['users_user_id'];
+        $bank_transaction['receiver']=$receiver;
+        $this->m_bank_transaction->save_bank_transaction($bank_transaction);
     
-        $this->mlogin->register($user_data);
-    
-        redirect(base_url('login'));
+        redirect(base_url('players/play-game'));
     }
 }
