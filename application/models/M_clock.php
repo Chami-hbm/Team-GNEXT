@@ -19,6 +19,12 @@ class M_clock extends CI_Model {
         $this->db->update('clock', $data);
     }
     
+    public function reset_turns() {
+        $this->db->set('current_turn', 1, FALSE);
+        $this->db->where('clock_id', 1);
+        $this->db->update('clock', $data);
+    }
+    
     public function sector_trend($sector,$value) {
         $this->db->select('*');
         $this->db->where('company_sector', $sector);
