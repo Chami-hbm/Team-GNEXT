@@ -4,6 +4,7 @@
     var secs = 0;
     timer.start({precision: 'seconds', startValues: {seconds: 0}, target: {seconds: 600}});
     $('#time').html(timer.getTimeValues().toString());
+    $.get("<?php echo base_url() ?>clock/reset-turns", function() {});
     timer.addEventListener('secondsUpdated', function (e) {
         secs++;
         if (secs == 60) {
@@ -11,10 +12,9 @@
             turns++;
             console.log(turns);
             $('#turns').html(turns);
-            $.get("<?php echo base_url() ?>clock/new-turn", function() {});
         }
         $('#time').html(timer.getTimeValues().toString());
-//        $('#turns').html(turns);
+        $('#turns').html(turns);
     });
     timer.addEventListener('targetAchieved', function (e) {
         $('#turns').html('10 Turns completed. Game Over!!');
