@@ -14,6 +14,7 @@ class M_company_stock extends CI_Model {
         $this->db->from('company_stocks as cs');
         $this->db->join('users as cp', 'cs.users_user_id = cp.user_id', 'left');
         $this->db->where('type', 'sell');
+        $this->db->where('cp.company_name !=',NULL);
         $query = $this->db->get();
         $result = $query->result_array();
         return $result;
@@ -22,6 +23,12 @@ class M_company_stock extends CI_Model {
     function decrease_stock_qty($stock_id, $qty) {
         $this->db->where('company_stock_id', $stock_id);
         $this->db->set('quantity', 'quantity-' . $qty, FALSE);
+        $this->db->update('company_stocks');
+    }
+    
+    function increase_stock_qty($stock_id, $qty) {
+        $this->db->where('company_stock_id', $stock_id);
+        $this->db->set('quantity', 'quantity+' . $qty, FALSE);
         $this->db->update('company_stocks');
     }
     
