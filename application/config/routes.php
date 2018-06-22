@@ -18,6 +18,7 @@ $route['players/get-analyst'] = 'players/players/get_analyst';
 $route['players/view-bank-balance'] = 'players/players/view_bank_balance';
 $route['players/view-stock-portfolio'] = 'players/players_portfolio/index';
 $route['players/view-current-historical-price-shares'] = 'players/players_historical_price/index';
+$route['players/view-current-historical-price-shares/list/(:any)/(:any)'] = 'players/players_historical_price/load_table/$1/$2';
 
 //Players Stocks
 $route['players/stocks/buy/save'] = 'players/players_stock/save_buy';
@@ -27,6 +28,7 @@ $route['players/stocks/sell/save'] = 'players/players_stock/save_sell';
 //Brokers
 $route['brokers/view-portfolio'] = 'brokers/brokers/view_portfolio';
 $route['brokers/players-transactions'] = 'brokers/brokers_transactions/index';
+$route['brokers/players-transactions/list/(:any)'] = 'brokers/brokers_transactions/transaction_player_list/$1';
 $route['brokers/stock-management'] = 'brokers/brokers_stock/index';
 $route['brokers/view-price-of-stock'] = 'brokers/brokers_historical_price/index';
 

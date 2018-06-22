@@ -11,6 +11,8 @@ class Players_historical_price extends User_controller{
             'title' => 'Players | Historical Price of Shares - ' . $this->config->item('site_name'),
             'usertype' => "players",
         );
+        $this->load->model('m_company_stock');
+        $this->load->model('m_user');
     }
     
     public function index(){
@@ -22,8 +24,15 @@ class Players_historical_price extends User_controller{
         $data['header'] = $this->load->view('template/a_vheader', $data, TRUE);
         $data['footer'] = $this->load->view('template/a_vfooter', NULL, TRUE);
 
+        $data['companies']=  $this->m_user->get_all_companies();
+        
         $this->load->view('includes/v_include_header', $data);
         $this->load->view('players/v_player_historical_price');
         $this->load->view('includes/v_include_footer');
     }   
+    
+    public function load_table($value,$type) {
+        $data['details'] = $this->m_company_stock->get_table_for_player_stock($value,$type);
+        $this->load->view('players/loading_pages/v_historical_price_table', $data);
+    }
 }

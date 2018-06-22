@@ -11,6 +11,7 @@ class Players_portfolio extends User_controller{
             'title' => 'Players | Portfolio - ' . $this->config->item('site_name'),
             'usertype' => "players",
         );
+        $this->load->model('m_user');
     }
     
     public function index(){
@@ -21,6 +22,8 @@ class Players_portfolio extends User_controller{
         $data['header'] = $this->load->view('template/a_vheader', $data, TRUE);
         $data['footer'] = $this->load->view('template/a_vfooter', NULL, TRUE);
 
+        $data['details']=  $this->m_user->get_player_stocks();
+        
         $this->load->view('includes/v_include_header', $data);
         $this->load->view('players/v_players_portfolio');
         $this->load->view('includes/v_include_footer');

@@ -12,6 +12,7 @@ class Brokers extends User_controller{
             'description' => 'Customers Details of' . $this->config->item('description'),
             'usertype' => "brokers",
         );
+        $this->load->model('m_user');
     }
     
     public function view_portfolio(){
@@ -21,7 +22,9 @@ class Brokers extends User_controller{
         $data['navigation_buttons'] = $this->load->view('brokers/loading_pages/navigation_buttons',$data, true);
         $data['header'] = $this->load->view('template/a_vheader', $data, TRUE);
         $data['footer'] = $this->load->view('template/a_vfooter', NULL, TRUE);
-
+        
+        $data['details']=  $this->m_user->get_players_stocks_by_broker();
+        
         $this->load->view('includes/v_include_header', $data);
         $this->load->view('brokers/v_brokers_portfolio');
         $this->load->view('includes/v_include_footer');

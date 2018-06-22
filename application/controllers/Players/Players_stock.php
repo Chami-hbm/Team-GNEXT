@@ -154,7 +154,7 @@ class Players_stock extends User_controller {
         $bank_transaction['type'] = 'Deposit';
         $bank_transaction['amount'] = $this->input->post('sell_total');
         $bank_transaction['users_user_id'] = $player_stock['users_user_id'];
-        $bank_transaction['receiver'] = $sender;
+        $bank_transaction['sender'] = $sender;
         $this->m_bank_transaction->save_bank_transaction($bank_transaction);
 
         redirect(base_url('players/play-game'));
