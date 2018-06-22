@@ -11,12 +11,16 @@ class Players extends User_controller{
             'title' => 'Players - ' . $this->config->item('site_name'),
             'usertype' => "players",
         );
+        
+        $this->load->model('m_user');
     }
     
     public function view_bank_balance(){
         $data=$this->data;
         $data['title'] = 'Players | View Bank Balance - ' . $this->config->item('site_name');
         $data['scripts'][0]['src'] = base_url() . "assets/plugins/form-validation/jquery.validate.min.js";
+        
+        $data['balance']=  $this->m_user->get_user_balance();
     
         $data['navigation_buttons'] = $this->load->view('players/loading_pages/navigation_buttons',$data, true);
         $data['header'] = $this->load->view('template/a_vheader', $data, TRUE);
