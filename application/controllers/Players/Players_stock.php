@@ -43,6 +43,8 @@ class Players_stock extends User_controller {
         $player_stock_id = $this->m_player_stock->save_buy($player_stock);
         $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'], $player_stock['quantity']);
 
+        $player['decrement'] = $this->input->post('total');
+        $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'],$player['decrement']);
         $turn = $this->m_clock->get_current_turn();
 
         $stock_transaction['turn'] = $turn;
@@ -75,7 +77,8 @@ class Players_stock extends User_controller {
 
             $player_stock_id = $this->m_player_stock->save_buy($player_stock);
             $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'], $player_stock['quantity']);
-
+            $player['decrement'] = $this->input->post('total');
+            $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'],$player['decrement']);
             $turn = $this->m_clock->get_current_turn();
 
             $stock_transaction['turn'] = $turn;
@@ -102,12 +105,13 @@ class Players_stock extends User_controller {
 
             $player_stock_id = $this->m_player_stock->save_buy($player_stock);
             $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'], $player_stock['quantity']);
-
+            $player['decrement'] = ($player_stock['price']+5)*$player_stock['quantity'];
+            $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'],$player['decrement']);
             $turn = $this->m_clock->get_current_turn();
 
             $stock_transaction['turn'] = $turn;
             $stock_transaction['type'] = 'Buy';
-            $stock_transaction['price'] = $player_stock['price'];
+            $stock_transaction['price'] = $player_stock['price']+5;
             $stock_transaction['player_stocks_player_stock_id'] = $player_stock_id;
             $stock_transaction['company_stocks_company_stock_id'] = $player_stock['company_stocks_company_stock_id'];
             $stock_transaction['quantity'] = $player_stock['quantity'];
@@ -123,6 +127,7 @@ class Players_stock extends User_controller {
             $status='ai';
         }
         echo $status;
+//        echo 'winner:'.$winner.' | status:'.$status;
     }
 
 }
