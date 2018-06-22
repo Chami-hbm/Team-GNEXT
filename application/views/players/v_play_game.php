@@ -316,7 +316,7 @@
                         <div class="form-group">
                             <div class="col-sm-3"></div>
                             <button type="button" class="btn btn-info">Sell</button>
-                            <button type="button" data-dismiss="modal" class="btn ">Cancel</button>
+                            <button type="button" data-dismiss="modal" class="btn ">OK</button>
                         </div>
                     </div>
                 </div>
@@ -330,19 +330,21 @@
 <script>
     $(document).ready(function() {
         $('#bid-btn').click(function() {
+            console.log($('#bid-form').serialize());
             $.ajax({
                 type: 'POST',
                 data: $('#bid-form').serialize(),
                 url: "<?php echo base_url('players/stocks/bid-buy/save'); ?>",
                 success: function(data) {
-                    if (data == 'ai') {
-                        $('#winning-player').modal('toggle');
-                        $('#biding').modal('toggle');
-                        $('#winning-status').html('Sorry, You lost the bid');
-                    } else {
+                    console.log(data);
+                    if (data == 0) {
                         $('#winning-player').modal('toggle');
                         $('#biding').modal('toggle');
                         $('#winning-status').html('Congrats, You win the bid');
+                    } else {
+                        $('#winning-player').modal('toggle');
+                        $('#biding').modal('toggle');
+                        $('#winning-status').html('Sorry, You lost the bid');
                     }
                 }
             });
