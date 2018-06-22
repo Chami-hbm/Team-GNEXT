@@ -22,6 +22,7 @@ $route['players/view-current-historical-price-shares'] = 'players/players_histor
 //Players Stocks
 $route['players/stocks/buy/save'] = 'players/players_stock/save_buy';
 $route['players/stocks/bid-buy/save'] = 'players/players_stock/save_buy_bid';
+$route['players/stocks/sell/save'] = 'players/players_stock/save_sell';
 
 //Brokers
 $route['brokers/view-portfolio'] = 'brokers/brokers/view_portfolio';

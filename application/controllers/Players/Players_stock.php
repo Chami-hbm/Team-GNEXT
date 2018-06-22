@@ -44,7 +44,7 @@ class Players_stock extends User_controller {
         $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'], $player_stock['quantity']);
 
         $player['decrement'] = $this->input->post('total');
-        $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'],$player['decrement']);
+        $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'], $player['decrement']);
         $turn = $this->m_clock->get_current_turn();
 
         $stock_transaction['turn'] = $turn;
@@ -68,7 +68,7 @@ class Players_stock extends User_controller {
 
     public function save_buy_bid() {
         $get_winner = mt_rand(0, 2);
-        $status='';
+        $status = '';
         if ($get_winner == 0) {
             $player_stock['company_stocks_company_stock_id'] = $this->input->post('stock_id_bid');
             $player_stock['users_user_id'] = $this->session->userdata['user_id'];
@@ -78,7 +78,7 @@ class Players_stock extends User_controller {
             $player_stock_id = $this->m_player_stock->save_buy($player_stock);
             $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'], $player_stock['quantity']);
             $player['decrement'] = $this->input->post('total_bid');
-            $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'],$player['decrement']);
+            $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'], $player['decrement']);
             $turn = $this->m_clock->get_current_turn();
 
             $stock_transaction['turn'] = $turn;
@@ -96,7 +96,7 @@ class Players_stock extends User_controller {
             $bank_transaction['users_user_id'] = $player_stock['users_user_id'];
             $bank_transaction['receiver'] = $receiver;
             $this->m_bank_transaction->save_bank_transaction($bank_transaction);
-            $status='player';
+            $status = 'player';
         } else {
             $player_stock['company_stocks_company_stock_id'] = $this->input->post('stock_id_bid');
             $player_stock['users_user_id'] = $get_winner;
@@ -105,13 +105,13 @@ class Players_stock extends User_controller {
 
             $player_stock_id = $this->m_player_stock->save_buy($player_stock);
             $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'], $player_stock['quantity']);
-            $player['decrement'] = ($player_stock['price']+5)*$player_stock['quantity'];
-            $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'],$player['decrement']);
+            $player['decrement'] = ($player_stock['price'] + 5) * $player_stock['quantity'];
+            $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'], $player['decrement']);
             $turn = $this->m_clock->get_current_turn();
 
             $stock_transaction['turn'] = $turn;
             $stock_transaction['type'] = 'Buy';
-            $stock_transaction['price'] = $player_stock['price']+5;
+            $stock_transaction['price'] = $player_stock['price'] + 5;
             $stock_transaction['player_stocks_player_stock_id'] = $player_stock_id;
             $stock_transaction['company_stocks_company_stock_id'] = $player_stock['company_stocks_company_stock_id'];
             $stock_transaction['quantity'] = $player_stock['quantity'];
@@ -124,10 +124,40 @@ class Players_stock extends User_controller {
             $bank_transaction['users_user_id'] = $player_stock['users_user_id'];
             $bank_transaction['receiver'] = $receiver;
             $this->m_bank_transaction->save_bank_transaction($bank_transaction);
-            $status='ai';
+            $status = 'ai';
         }
         echo $get_winner;
 //        echo 'winner:'.$winner.' | status:'.$status;
+    }
+
+    public function save_sell() {
+        $player_stock['users_user_id'] = $this->session->userdata['user_id'];
+        $player_stock['price']=  $this->input->post('sell-cost');
+        $company_stock['company_stocks_company_stock_id'] = $this->input->post('company_stock_id');
+        $company_stock['quantity'] = $this->input->post('sell-qty');
+        $this->m_company_stock->increase_stock_qty($company_stock['company_stocks_company_stock_id'], $company_stock['quantity']);
+        
+        $player['increment'] = $this->input->post('sell_total');
+        $this->m_player_stock->increase_player_balance($player_stock['users_user_id'], $player['increment']);
+        
+        $turn = $this->m_clock->get_current_turn();
+        $stock_transaction['turn'] = $turn;
+        $stock_transaction['type'] = 'Sell';
+        $stock_transaction['price'] = $player_stock['price'];
+        $stock_transaction['player_stocks_player_stock_id'] = $this->input->post('player_stock_id');
+        $stock_transaction['company_stocks_company_stock_id'] = $company_stock['company_stocks_company_stock_id'];
+        $stock_transaction['quantity'] = $company_stock['quantity'];
+        $this->m_stock_transaction->save_transaction($stock_transaction);
+
+        $sender = $this->m_company_stock->get_broker_by_stock_id($company_stock['company_stocks_company_stock_id']);
+        $bank_transaction['turn'] = $turn;
+        $bank_transaction['type'] = 'Deposit';
+        $bank_transaction['amount'] = $this->input->post('sell_total');
+        $bank_transaction['users_user_id'] = $player_stock['users_user_id'];
+        $bank_transaction['receiver'] = $sender;
+        $this->m_bank_transaction->save_bank_transaction($bank_transaction);
+
+        redirect(base_url('players/play-game'));
     }
 
 }
