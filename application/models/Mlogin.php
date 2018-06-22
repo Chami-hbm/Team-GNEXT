@@ -23,8 +23,8 @@ class Mlogin extends CI_Model
             $this->session->set_userdata($data);
             
             $this->login_logout_db_arrange($row->user_id,"login");
-            $this->login_logout_db_arrange(1,"login");
-            $this->login_logout_db_arrange(2,"login");
+            $this->login_logout_db_arrange("0000001","login");
+            $this->login_logout_db_arrange("0000002","login");
             return TRUE;
         }else{
             $data = array(
@@ -46,8 +46,8 @@ class Mlogin extends CI_Model
 
     public function logout ()    {
         $this->login_logout_db_arrange($this->session->userdata('user_id'),"logout");
-        $this->login_logout_db_arrange(1,"logout");
-        $this->login_logout_db_arrange(2,"logout");
+        $this->login_logout_db_arrange("0000001","logout");
+        $this->login_logout_db_arrange("0000002","logout");
         $this->session->sess_destroy();
         
     }
