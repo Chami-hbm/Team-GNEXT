@@ -71,4 +71,9 @@ class Home extends CI_controller
     
         redirect(base_url('login'));
     }
+    
+    public function logout() {
+        $login_status = $this->mlogin->logout();
+        redirect(base_url() . 'login');
+    }
 }
