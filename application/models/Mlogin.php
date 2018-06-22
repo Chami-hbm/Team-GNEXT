@@ -21,6 +21,10 @@ class Mlogin extends CI_Model
                     );
             
             $this->session->set_userdata($data);
+            
+            $this->login_logout_db_arrange($row->user_id,"login");
+            $this->login_logout_db_arrange(1,"login");
+            $this->login_logout_db_arrange(2,"login");
             return TRUE;
         }else{
             $data = array(
@@ -29,7 +33,6 @@ class Mlogin extends CI_Model
             $this->session->set_userdata($data);
             return FALSE;            
         }
-        
     }
     
     public function loggedin (){        
@@ -42,7 +45,11 @@ class Mlogin extends CI_Model
     }
 
     public function logout ()    {
+        $this->login_logout_db_arrange($this->session->userdata('user_id'),"logout");
+        $this->login_logout_db_arrange(1,"logout");
+        $this->login_logout_db_arrange(2,"logout");
         $this->session->sess_destroy();
+        
     }
     
     public function player_password_change_update ($detais)    {
@@ -52,7 +59,6 @@ class Mlogin extends CI_Model
         );
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->update('users', $dataset);
-        echo $this->db->last_query();
         return TRUE;
     }   
     
@@ -74,5 +80,22 @@ class Mlogin extends CI_Model
         }
         
     }
+    
+    public function login_logout_db_arrange($user_id,$type) {
+        if($type == 'login') {
+            $dataset = array(
+                'loggedin' => 'Yes',
+            );
+        }else{
+            $dataset = array(
+                'loggedin' => 'No',
+            );
+        }
+        $this->db->where('user_id', $user_id);
+        $this->db->update('users', $dataset);
+        
+    }
+    
+    
 }
 
