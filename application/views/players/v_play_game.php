@@ -228,16 +228,19 @@
                                 <input type="text" readonly class="form-control" id="share_point" name="share_point">
                             </div>
                         </div>
+                        <div class="alert alert-primary hide" id="bid-validation-msg">
+                          <strong>You have placed a lower bid than the Current Share Point and we have increased it for the minimum value</strong>
+                        </div>
                         <div class="form-group">
                             <label class="control-label bold col-sm-4"><b>Enter your bid</b></label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" onkeyup="change_total_cost();" id="bid" name="bid">
+                                <input type="number" class="form-control" onkeyup="change_total_cost('bid');" id="bid" name="bid">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">Quantity to be buying</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="quantity_bid" onkeyup="change_total_cost();" name="quantity_bid">
+                                <input type="number" class="form-control" id="quantity_bid" onkeyup="change_total_cost('qty');" name="quantity_bid">
                             </div>
                         </div>
                         <div class="form-group">
@@ -356,9 +359,15 @@
         $("#buy_stock_submit").removeAttr('disabled');
     }
 
-    function change_total_cost() {
+    function change_total_cost(element) {
         qty = $('#quantity_bid').val();
         bid = $('#bid').val();
+        if(element=="qty" && bid<$('#bid').attr('min')){
+            $('#bid-validation-msg').removeClass('hide');
+            $('#bid').val(parseFloat($('#bid').attr('min'))+1)
+        }else{
+            $('#bid-validation-msg').addClass('hide');
+        }
         if (qty == '') {
             qty = 0;
         }
