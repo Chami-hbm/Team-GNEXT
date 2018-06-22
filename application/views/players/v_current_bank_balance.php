@@ -27,21 +27,21 @@
 
                                                     <div class="panel-body">
                                                         <form action="">
-                                                            <div class="form-group row">
+<!--                                                            <div class="form-group row">
                                                                 <label class="control-label col-sm-3">Account No</label>
                                                                 <div class="col-sm-9">
                                                                     <input type="text" class="form-control"
                                                                            name="acc_no" id="acc_no"
                                                                            placeholder="Enter the account number....">
                                                                 </div>
-                                                            </div>
+                                                            </div>-->
                                                             <div class="form-group row">
                                                                 <label class="control-label col-sm-3">Your
                                                                     Balance is</label>
                                                                 <div class="col-sm-9">
                                                                     <input type="text" class="form-control"
                                                                            name="balance" id="balance"
-                                                                           placeholder="Balance" readonly>
+                                                                           placeholder="Balance" readonly value="<?php echo $balance; ?>">
                                                                 </div>
                                                             </div>
                                                         </form>
