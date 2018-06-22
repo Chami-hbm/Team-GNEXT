@@ -277,7 +277,7 @@
     </div>
 </div>
 <div class="modal fade" id="sell_stock" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -290,33 +290,43 @@
                 <div class="modal-body">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Select the Company</label>
+                            <label class="control-label col-sm-4">Select the Stock</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <select name="player_stock_id" id="player_stock_id" class="form-control select-box" onchange="set_company_id();" title="Select Stock" required>
+                                    <option value="" selected disabled>Select the Stock</option>
+                                    <?php
+                                    if (isset($stock_for_sell)) {
+                                        foreach ($stock_for_sell as $row) {
+                                            echo '<option value="' . $row['player_stock_id'] . '" data-price="' . $row['price'] . '" data-stock-id="' . $row['company_stocks_company_stock_id'] . '" data-company="' . $row['company_name'] . '">' . $row['company_name'] . ' | ' . $row['company_stock_name'] . ' | ' . $row['quantity'] . ' | ' . $row['price'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <input type="hidden" name="company_stock_id" id="company_stock_id">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Cost per share</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="sell-cost" onkeyup="cal_total_selling();" readonly name="sell-cost" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">Quantity to be selling</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">Cost per share</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="text" id="sell-qty" onkeyup="cal_total_selling();" name="sell-qty" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label bold col-sm-4"><b>Total earning of your selling is</b></label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="text" id="sell_total" name="sell_total" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-3"></div>
-                            <button type="button" class="btn btn-info">Sell</button>
-                            <button type="button" data-dismiss="modal" class="btn ">OK</button>
+                            <button type="submit" class="btn btn-info">Sell</button>
+                            <button type="button" data-dismiss="modal" class="btn ">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -393,5 +403,24 @@
             $('#bid').attr('min', price);
             $('#stock_id_bid').val(stock);
         }
+    }
+    
+    function cal_total_selling(){
+        cost=$('#sell-cost').val();
+        qty=$('#sell-qty').val();
+        if (qty == '') {
+            qty = 0;
+        }
+        if (cost == '') {
+            cost = 0;
+        }
+        $('#sell_total').val(cost*qty);
+    }
+    
+    function set_company_id(){
+        id=$('#player_stock_id option:selected').data('stock-id');
+        cost=$('#player_stock_id option:selected').data('price');
+        $('#company_stock_id').val(id);
+        $('#sell-cost').val(cost);
     }
 </script>
