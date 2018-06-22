@@ -1,14 +1,12 @@
 <?php
 if(isset($usertype)) {
-    
     if($usertype === "players") {
-        $dashboard_url = base_url() . 'player/inventory/dashboard';
-        $logout_url = base_url() . 'player/logout';
+        $dashboard_url = base_url() . 'player/play-game';
     }
     if($usertype === "brokers") {
         $dashboard_url = base_url() . 'broker';
-        $logout_url = base_url() . 'broker/logout';
     }
+    $logout_url = base_url() . 'logout';
 }
 ?>
 <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">
