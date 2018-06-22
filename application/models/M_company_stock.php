@@ -36,5 +36,19 @@ class M_company_stock extends CI_Model {
         $this->db->where('company_stock_id',$stock_id);
         return $this->db->get('company_stocks')->result_array()[0]['users_user_id'];
     }
+    public function get_table_for_player_stock($value,$type) {
+        $this->db->select('*');
+        $this->db->from('company_stocks as cs');
+        $this->db->join('users as u','u.user_id=cs.users_user_id');
+        if($type=='sector1'){
+            $this->db->where('u.company_sector',$value);
+        }else if($type=='company'){
+            $this->db->where('u.user_id',$value);
+        }else{
+            
+        }
+        return $this->db->get()->result_array();
+        
+    }
 
 }
