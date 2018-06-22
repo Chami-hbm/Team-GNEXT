@@ -8,4 +8,10 @@ class M_player_stock extends CI_Model
         $this->db->insert('player_stocks',$data);
         return $this->db->insert_id();
     }
+    
+    public function decrease_player_balance($user_id,$decrement) {
+        $this->db->set('current_balance', 'current_balance - '.$decrement, FALSE);
+        $this->db->where('user_id', $user_id);
+        $this->db->update('users', $data);
+    }
 }
