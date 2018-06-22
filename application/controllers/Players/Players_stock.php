@@ -77,7 +77,7 @@ class Players_stock extends User_controller {
 
             $player_stock_id = $this->m_player_stock->save_buy($player_stock);
             $this->m_company_stock->decrease_stock_qty($player_stock['company_stocks_company_stock_id'], $player_stock['quantity']);
-            $player['decrement'] = $this->input->post('total');
+            $player['decrement'] = $this->input->post('total_bid');
             $this->m_player_stock->decrease_player_balance($player_stock['users_user_id'],$player['decrement']);
             $turn = $this->m_clock->get_current_turn();
 
@@ -126,7 +126,7 @@ class Players_stock extends User_controller {
             $this->m_bank_transaction->save_bank_transaction($bank_transaction);
             $status='ai';
         }
-        echo $status;
+        echo $get_winner;
 //        echo 'winner:'.$winner.' | status:'.$status;
     }
 
