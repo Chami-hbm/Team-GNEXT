@@ -28,56 +28,31 @@
                                                     <div class="panel-body">
                                                         <form action="">
                                                             <div class="form-group row">
-                                                                <label class="control-label col-sm-3">Player ID</label>
+                                                                <label class="control-label col-sm-3">Player</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control"
-                                                                           name="player_id" id="player_id"
-                                                                           placeholder="Enter Player ID"
-                                                                           title="Player ID">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="control-label col-sm-3">Name</label>
-                                                                <div class="col-sm-9">
-                                                                    <input type="text" class="form-control"
-                                                                           name="name" id="name" title="Name"
-                                                                           placeholder="Enter name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="control-label col-sm-3">Company</label>
-                                                                <div class="col-sm-9">
-                                                                    <select name="company" id="company"
+                                                                    <select name="player" id="player"
                                                                             class="form-control select-box"
-                                                                            title="Company" data-placeholder="Select the
-                                                                             company">
+                                                                            title="Player" data-placeholder="Select the
+                                                                            Player" onclick="get_player_table(this);">
                                                                         <option></option>
-                                                                        <option value="1">Company 1</option>
+                                                                        <?php 
+                                                                        if($players){
+                                                                            foreach ($players as $value) {
+                                                                                
+                                                                        ?>
+                                                                        <option value="<?php echo $value['user_id']; ?>"><?php echo $value['name']; ?></option>
+                                                                        <?php
+                                                                        
+                                                                            }
+                                                                        }
+                                                                        ?>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </form>
+                                                        <div id="table-div">
                                                         
-                                                        <table class="table-striped table table-hover table-bordered">
-                                                            <thead>
-                                                            <tr class="alert-info">
-                                                                <th></th>
-                                                                <th></th>
-                                                                <th></th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,8 +65,16 @@
 
                 </div> <!-- #page-content -->
             </div>
-            
+
             <?php echo $footer; ?>
         </div>
     </div>
 </div>
+<script>
+function get_player_table(vall){
+    player=$(vall).val();
+    $('#table-div').load(base_url+'brokers/players-transactions/list/'+player);
+    
+}
+
+</script>

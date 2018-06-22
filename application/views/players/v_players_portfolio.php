@@ -28,25 +28,37 @@
                                                     <div class="panel-body">
                                                         <table class="table table-bordered table-striped table-hover">
                                                             <thead>
-                                                            <tr class="alert-info">
-                                                                <th>Sector</th>
-                                                                <th>Company</th>
-                                                                <th>Price</th>
-                                                                <th>Amount</th>
-                                                            </tr>
+                                                                <tr class="alert-info">
+                                                                    <th>Sector</th>
+                                                                    <th>Company</th>
+                                                                    <th>Price</th>
+                                                                    <th>Amount</th>
+                                                                </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>IT</td>
-                                                                <td>company 1</td>
-                                                                <td>1000</td>
-                                                                <td>20</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2"><strong>Total</strong></td>
-                                                                <td>1000</td>
-                                                                <td>20</td>
-                                                            </tr>
+                                                                <?php
+                                                                $qty_tot=0;
+                                                                $price_tot=0;
+                                                                if (isset($details)) {
+                                                                    foreach ($details as $value) {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?php echo $value['company_sector'] ?></td>
+                                                                            <td><?php echo $value['company_name'] ?></td>
+                                                                            <td><?php echo $value['price'] ?></td>
+                                                                            <td><?php echo $value['quantity'] ?></td>
+                                                                        </tr>
+                                                                        <?php
+                                                                $qty_tot+=$value['quantity'];
+                                                                $price_tot+=$value['price'];
+                                                                    }
+                                                                }
+                                                                ?>
+                                                                <tr>
+                                                                    <td colspan="2"><strong>Total</strong></td>
+                                                                    <td><?php echo $price_tot; ?></td>
+                                                                    <td><?php echo $qty_tot; ?></td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -61,7 +73,7 @@
 
                 </div> <!-- #page-content -->
             </div>
-            
+
             <?php echo $footer; ?>
         </div>
     </div>
@@ -73,7 +85,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title center" id="myModalLabel"><b>Current Stock Price</b></h4>
             </div>
             <form action="<?php echo base_url('player/inventory/banks/delete'); ?>" method="post"
@@ -107,7 +119,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title center" id="myModalLabel"><b>Comparison of ABC Company shows</b></h4>
             </div>
             <form action="<?php echo base_url('player/inventory/banks/delete'); ?>" method="post"
@@ -139,7 +151,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title center" id="myModalLabel"><b>Should load all available shares in the market to
                         the grid from stock file</b></h4>
             </div>
@@ -182,7 +194,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title center" id="myModalLabel"><b> Should load all current shares in hand of the
                         player from player’s stock file </b></h4>
             </div>

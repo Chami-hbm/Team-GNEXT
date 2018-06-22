@@ -37,7 +37,11 @@
                                                                             title="Sector" data-placeholder="Select the
                                                                              sector">
                                                                         <option></option>
-                                                                        <option value="it">IT</option>
+                                                                        <option value="IT">IT</option>
+                                                                        <option value="Finance">Finance</option>
+                                                                        <option value="HealthCare">HealthCare</option>
+                                                                        <option value="Consumer Services">Consumer Services</option>
+                                                                        <option value="Manufacturing">Manufacturing</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -49,7 +53,15 @@
                                                                             title="Company" data-placeholder="Select the
                                                                              company">
                                                                         <option></option>
-                                                                        <option value="1">Company 1</option>
+                                                                        <?php
+                                                                        if($companies){
+                                                                            foreach ($companies as $value) {
+                                                                                
+                                                                        ?>
+                                                                        <option value="<?php echo $value['user_id']; ?>"><?php echo $value['company_name']; ?></option>
+                                                                        <?php
+                                                                        }}
+                                                                        ?>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -57,14 +69,7 @@
                                                                 <div class="col-sm-6">
                                                                     <button type="button" class="btn btn-primary btn-lg"
                                                                             data-toggle="modal"
-                                                                            data-target="#current_price">
-                                                                        View Current Price
-                                                                    </button>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <button type="button" class="btn btn-primary btn-lg"
-                                                                            data-toggle="modal"
-                                                                            data-target="#comparision">
+                                                                            data-target="#comparision" onclick="get_table();">
                                                                         View Comparision
                                                                     </button>
                                                                 </div>
@@ -116,28 +121,15 @@
     </div>
 </div>
 
-<div class="modal fade" id="comparision" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+<div  class="modal fade" id="comparision" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog"  role="document">
+        <div  class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Comparision of Selected Company</h4>
             </div>
-            <div class="modal-body">
-                <table class="table-hover table table-bordered table-striped">
-                    <thead>
-                    <tr class="alert-info">
-                        <td>Before</td>
-                        <td>Now</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>70</td>
-                        <td>150</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="modal-body" id="table-div">
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -145,3 +137,22 @@
         </div>
     </div>
 </div>
+<script>
+    function get_table(){
+        company=$('#company').val();
+        sector=$('#sector').val();
+        if(company != ''){
+            type='company';
+            value=company;
+        }else if(sector != ''){
+            type='sector1';
+            value=sector;
+        }else{
+            type='all';
+            value='none';
+        }
+        console.log(value);
+        console.log(type);
+        $('#table-div').load(base_url+'players/view-current-historical-price-shares/list/'+value+'/'+type);
+    }
+</script>
