@@ -1,3 +1,31 @@
+<script>
+    console.log('data.current_clock_value');
+    var timer = new Timer();
+    var turns = 1;
+    var secs = 0;
+    timer.start({precision: 'seconds', startValues: {seconds: 0}, target: {seconds: 900}});
+    $('#time').html(timer.getTimeValues().toString());
+//    $.get("<?php echo base_url() ?>clock/reset-turns", function() {});
+    timer.addEventListener('secondsUpdated', function (e) {
+//        secs++;
+        $.get("<?php echo base_url() ?>clock/clock-time-getting", function(data) {
+            var data = JSON.parse(data);
+            if (data.current_clock_value == "00:03:00") {
+                $('#timer').load("<?php echo base_url() ?>clock/view-player-leaderboard"); 
+//                $('#time').val(data.current_clock_value);
+//                $('#turns').val(data.current_turn); 
+                
+            }else{
+                console.log(data.current_clock_value)
+                $('#time').val(data.current_clock_value);
+                $('#turns').val(data.current_turn);            
+            }  
+        });
+    });
+    timer.addEventListener('targetAchieved', function (e) {
+        $('#turns').html('10 Turns completed. Game Over!!');
+    });
+</script>
 <?php echo $header; ?>
 
 <div id="wrapper">
@@ -45,26 +73,26 @@
                                                                     </button>
                                                                 </div>-->
                                                             </div>
-                                                            <div class="col-sm-7">
+                                                            <div class="col-sm-7" id="timer">
                                                                 <div class="form-group row">
                                                                     <label class="control-label col-sm-3">Time
                                                                         Remaining</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" id="time">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="control-label col-sm-3">Round
                                                                         No</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" id="turns">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="control-label col-sm-3">Number of
                                                                         Players</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" value="3">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -194,7 +222,7 @@
                           <strong>You are going to buy more than the quantity available on the stock</strong>
                         </div>
                         <div class="form-group">
-                            <label class="control-label bold col-sm-4"><b>Total cost of your Buying is</b></label>
+                            <label class="control-label bold col-sm-4"><b>Total cost of your Buying is Rs.</b></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control"  id="total" name="total" readonly="readonly">
                             </div>
@@ -237,7 +265,7 @@
                           <strong>You have placed a lower bid than the Current Share Point and we have increased it for the minimum value</strong>
                         </div>
                         <div class="form-group">
-                            <label class="control-label bold col-sm-4"><b>Enter your bid</b></label>
+                            <label class="control-label bold col-sm-4"><b>Enter your bid Rs.</b></label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" onkeyup="change_total_cost('bid');" id="bid" name="bid">
                             </div>
@@ -249,7 +277,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label bold col-sm-4"><b>Total cost of your Buying is</b></label>
+                            <label class="control-label bold col-sm-4"><b>Total cost of your Buying is Rs.</b></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control"  id="total_bid" name="total_bid" readonly>
                             </div>
@@ -310,7 +338,7 @@
                             <input type="hidden" name="company_stock_id" id="company_stock_id">
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Cost per share</label>
+                            <label class="control-label col-sm-4">Cost per share Rs.</label>
                             <div class="col-sm-8">
                                 <input type="text" id="sell-cost" onkeyup="cal_total_selling();" readonly name="sell-cost" class="form-control">
                             </div>
@@ -325,7 +353,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label bold col-sm-4"><b>Total earning of your selling is</b></label>
+                            <label class="control-label bold col-sm-4"><b>Total earning of your selling is Rs.</b></label>
                             <div class="col-sm-8">
                                 <input type="text" id="sell_total" name="sell_total" class="form-control">
                             </div>
@@ -375,12 +403,12 @@
         total = (parseFloat(quantity * price)).toFixed(2);
         total2 = (quantity * price);
         if(total2<=<?php echo $player_balance ?>){
-            $('#price').val('Rs. '+$('#company_stocks_company_stock_id option:selected').data('price'));
-            $("#total").val('Rs. '+total);
+            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
+            $("#total").val(total);
             $("#buy_stock_submit").removeAttr('disabled');
             $('#buy-validation-msg').addClass('hide');
         }else{
-            $("#total").val('Rs. '+total);
+            $("#total").val(total);
             $("#buy_stock_submit").attr('disabled','disabled');
             $('#buy-validation-msg').removeClass('hide');
         }
@@ -389,11 +417,11 @@
 //            console.log('Balance is :'+<?php echo $player_balance ?>);
 //            $("#total").val(total);
 //            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
-            $("#total").val('Rs. '+total);
+            $("#total").val(total);
             $("#buy_stock_submit").removeAttr('disabled');
             $('#qty-validation-msg').addClass('hide');
         }else{
-            $("#total").val('Rs. '+total);
+            $("#total").val(total);
             $("#buy_stock_submit").attr('disabled','disabled');
             $('#qty-validation-msg').removeClass('hide');
         }
@@ -415,7 +443,7 @@
             bid = 0;
         }
 
-        $('#total_bid').val('Rs. '+(bid * qty));
+        $('#total_bid').val((bid * qty));
     }
 
     function check_company_default() {
@@ -450,12 +478,12 @@
         if(qty<=possible_qty){
 //            console.log('Total is :'+total2);
 //            console.log('Balance is :'+<?php echo $player_balance ?>);
-            $("#sell_total").val('Rs. '+total);
+            $("#sell_total").val(total);
 //            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
             $("#sell_submit").removeAttr('disabled');
             $('#sell-qty-validation-msg').addClass('hide');
         }else{
-            $("#sell_total").val('Rs. '+total);
+            $("#sell_total").val(total);
             $("#sell_submit").attr('disabled','disabled');
             $('#sell-qty-validation-msg').removeClass('hide');
         }

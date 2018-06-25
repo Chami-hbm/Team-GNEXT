@@ -2,7 +2,7 @@
     var timer = new Timer();
     var turns = 1;
     var secs = 0;
-    timer.start({precision: 'seconds', startValues: {seconds: 0}, target: {seconds: 900}});
+    timer.start({precision: 'seconds', startValues: {seconds: 0}, target: {seconds: 180}});
     $('#time').html(timer.getTimeValues().toString());
     $.get("<?php echo base_url() ?>clock/reset-turns", function() {});
     timer.addEventListener('secondsUpdated', function (e) {
@@ -14,6 +14,7 @@
             $('#turns').html(turns);
             $.get("<?php echo base_url() ?>clock/new-turn", function() {});
         }
+        $.get("<?php echo base_url() ?>clock/clock-time-setting/"+timer.getTimeValues().toString(), function() {});
         $('#time').html(timer.getTimeValues().toString());
         $('#turns').html(turns);
     });

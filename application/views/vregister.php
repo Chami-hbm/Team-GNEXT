@@ -59,7 +59,7 @@
                             <input type="password" title="Password" name="password_confirm" id="password_confirm" class="form-control" placeholder="Confirm your password" data-parsley-equalto="#password" required>
                         </div>
 
-                        <input type="submit" class="btn btn-primary btn-raised pull-right" value="Register"/>
+                        <input type="submit" class="btn btn-primary btn-raised pull-right" value="Register" style="background-color: #0066cc;"/>
 
                     </form>
 
