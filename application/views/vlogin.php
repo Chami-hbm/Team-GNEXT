@@ -19,10 +19,10 @@
                        value="<?php echo $this->security->get_csrf_hash(); ?>">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2>Login Form</h2>
+                    <div class="panel-heading" style="background-color: #606060;">
+                        <h2 style="color:#ffffff">Login Form</h2>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="background-color: #606060;">
 
 
                         <div class="form-group mb-md">
@@ -52,13 +52,13 @@
 
 
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer" style="background-color: #606060;">
                         <div class="clearfix">
-                            <input type="submit" class="btn btn-primary btn-raised pull-right" value="Login"/>
+                            <input type="submit" class="btn btn-primary btn-raised pull-right" value="Login" style="background-color: #0066cc;"/>
                         </div>
                         <hr/>
                         <a href="<?php echo base_url('/register'); ?>"
-                           class="btn btn-primary btn-raised btn-block">
+                           class="btn btn-primary btn-raised btn-block" style="background-color: #0066cc;">
                             Register
                         </a>
                     </div>

@@ -14,10 +14,10 @@
     <div class="row" style="margin-top: 20px">
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2>User Registration</h2>
+                <div class="panel-heading" style="background-color: #606060;">
+                    <h2 style="color:#ffffff">User Registration</h2>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="background-color: #606060;color: #ffffff">
                     Select the User type
                     <select name="user_type_select" id="user_type_select" class="form-control select-box" data-placeholder="Select user type" title="User Type">
                         <option value="" selected disabled>Select the User Type</option>
@@ -87,13 +87,13 @@
                             <input type="number" name="initial_balance" id="initial_balance" placeholder="Enter your initial balance" title="Initial Balance" class="form-control">
                         </div>
 
-                        <input type="submit" class="btn btn-primary btn-raised pull-right" value="Register"/>
+                        <input type="submit" class="btn btn-primary btn-raised pull-right" value="Register" style="background-color: #0066cc;"/>
 
                     </form>
                 </div>
-                <div class="panel-footer">
+                <div class="panel-footer" style="background-color: #606060;">
                     <hr/>
-                    <a href="<?php echo base_url('/login'); ?>" class="btn btn-primary btn-raised btn-block">
+                    <a href="<?php echo base_url('/login'); ?>" class="btn btn-primary btn-raised btn-block" style="background-color: #0066cc;">
                         Login
                     </a>
                 </div>

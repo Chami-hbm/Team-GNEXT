@@ -16344,7 +16344,8 @@ body {
 .static-content-wrapper {
     display: table-cell;
     width: 100%;
-    background: #f5f5f5;
+    background: #cce5ff;
+    /*background: #f5f5f5;*/
 }
 .static-sidebar-wrapper,
 .static-content-wrapper {
@@ -17431,7 +17432,8 @@ body.sidebar-collapsed .sidebar nav.widget-body > ul.acc-menu li.hasChild:hover 
     }
 }
 .static-content-wrapper {
-    background: #f5f5f5;
+    background: #cce5ff;
+    /*background: #f5f5f5;*/
 }
 .static-content {
     transition: width 250ms ease-in-out;

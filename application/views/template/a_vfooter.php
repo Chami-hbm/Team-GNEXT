@@ -1,6 +1,6 @@
 <footer>
     <center>
-        <p><a href="<?php echo base_url(); ?>"><?php echo $company_name; ?></a></p>
+        <p><a href="<?php echo base_url(); ?>" style="color:#606060"><?php echo $company_name; ?></a></p>
     </center>
     <div class="row">
         <div class="col-xs-12">
