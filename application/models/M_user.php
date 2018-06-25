@@ -51,7 +51,7 @@ class M_user extends CI_Model {
     }
     
     public function get_all_companies() {
-        $this->db->where('company_sector !=',NULL);
+        $this->db->where('player_type','company');
         $this->db->where('name !=',NULL);
         return $this->db->get('users')->result_array();
     }
