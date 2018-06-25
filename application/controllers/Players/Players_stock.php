@@ -159,5 +159,24 @@ class Players_stock extends User_controller {
 
         redirect(base_url('players/play-game'));
     }
+    
+    public function get_analyst_recommendation() {
+        $data=$this->data;
+        $player_stock['users_user_id'] = $this->session->userdata['user_id'];
+        
+        $data['title'] = 'Players | Get Analyst Recommendation - ' . $this->config->item('site_name');
+        $data['scripts'][0]['src'] = base_url() . "assets/plugins/form-validation/jquery.validate.min.js";
+        
+        $data['buy_set']=  $this->m_company_stock->get_stocks_for_buy_recommendation();
+        $data['sell_set']=  $this->m_company_stock->get_stocks_for_sell_recommendation();
+        
+        $data['navigation_buttons'] = $this->load->view('players/loading_pages/navigation_buttons',$data, true);
+        $data['header'] = $this->load->view('template/a_vheader', $data, TRUE);
+        $data['footer'] = $this->load->view('template/a_vfooter', NULL, TRUE);
+
+        $this->load->view('includes/v_include_header', $data);
+        $this->load->view('players/v_player_analyst_recommendation');
+        $this->load->view('includes/v_include_footer');
+    }
 
 }

@@ -14,7 +14,7 @@ $route['logout'] = "home/logout";
 
 //Players
 $route['players/play-game'] = 'players/players_play_game/index';
-$route['players/get-analyst'] = 'players/players/get_analyst';
+$route['players/get-analyst-recommendation'] = 'players/players_stock/get_analyst_recommendation';
 $route['players/view-bank-balance'] = 'players/players/view_bank_balance';
 $route['players/view-stock-portfolio'] = 'players/players_portfolio/index';
 $route['players/view-current-historical-price-shares'] = 'players/players_historical_price/index';
