@@ -14,7 +14,7 @@
                 <tr>
                     <td><?php echo $value['name'] ?></td>
                     <td><?php echo $value['type'] ?></td>
-                    <td><?php echo $value['amount'] ?></td>
+                    <td>Rs. <?php echo $value['amount'] ?></td>
                 </tr>
                 <?php
             }

@@ -49,8 +49,8 @@
                                                                             <td><?php echo $value['company_sector'] ?></td>
                                                                             <td><?php echo $value['company_name'] ?></td>
                                                                             <td><?php echo $value['company_stock_name'] ?></td>
-                                                                            <td><?php echo $value['previous_price'] ?></td>
-                                                                            <td><?php echo $value['price'] ?></td>
+                                                                            <td>Rs. <?php echo $value['previous_price'] ?></td>
+                                                                            <td>Rs. <?php echo $value['price'] ?></td>
                                                                             <td><?php echo number_format((float)((($value['price']-$value['previous_price'])/$value['previous_price'])*100), 2, '.', '').'%'; ?></td>
                                                                             <td><?php echo $value['quantity'] ?></td>
                                                                         </tr>
@@ -102,8 +102,8 @@
                                                                             <td><?php echo $value['br_company_sector'] ?></td>
                                                                             <td><?php echo $value['br_company_name'] ?></td>
                                                                             <td><?php echo $value['company_stock_name'] ?></td>
-                                                                            <td><?php echo $value['cs_previous_price'] ?></td>
-                                                                            <td><?php echo $value['cs_price'] ?></td>
+                                                                            <td>Rs. <?php echo $value['cs_previous_price'] ?></td>
+                                                                            <td>Rs. <?php echo $value['cs_price'] ?></td>
                                                                             <td><?php echo number_format((float)((($value['cs_price']-$value['cs_previous_price'])/$value['cs_previous_price'])*100*(-1)), 2, '.', '').'%'; ?></td>
                                                                             <td><?php echo $value['ps_quantity'] ?></td>
                                                                         </tr>

@@ -37,7 +37,7 @@
                                                             </div>-->
                                                             <div class="form-group row">
                                                                 <label class="control-label col-sm-3">Your
-                                                                    Balance is</label>
+                                                                    Balance (Rs.)</label>
                                                                 <div class="col-sm-9">
                                                                     <input type="text" class="form-control"
                                                                            name="balance" id="balance"

@@ -46,11 +46,11 @@
                                                                         <tr>
                                                                             <td><?php echo $value['name']; ?></td>
                                                                             <td><?php echo $value['user_id']; ?></td>
-                                                                            <td><?php echo $value['price1']; ?></td>
+                                                                            <td>Rs. <?php echo $value['price1']; ?></td>
                                                                             <td><?php echo $value['qty']; ?></td>
                                                                         </tr>
                                                                         <?php
-                                                                        $tot+= $value['quantity'];
+                                                                        $tot+= $value['quantity']*$value['price'];
                                                                         $price+=$value['price'];
                                                                     }
                                                                 }

@@ -375,14 +375,12 @@
         total = (parseFloat(quantity * price)).toFixed(2);
         total2 = (quantity * price);
         if(total2<=<?php echo $player_balance ?>){
-            console.log('Total is :'+total2);
-            console.log('Balance is :'+<?php echo $player_balance ?>);
-            $("#total").val(total);
-            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
+            $('#price').val('Rs. '+$('#company_stocks_company_stock_id option:selected').data('price'));
+            $("#total").val('Rs. '+total);
             $("#buy_stock_submit").removeAttr('disabled');
             $('#buy-validation-msg').addClass('hide');
         }else{
-            $("#total").val(total);
+            $("#total").val('Rs. '+total);
             $("#buy_stock_submit").attr('disabled','disabled');
             $('#buy-validation-msg').removeClass('hide');
         }
@@ -391,10 +389,11 @@
 //            console.log('Balance is :'+<?php echo $player_balance ?>);
 //            $("#total").val(total);
 //            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
+            $("#total").val('Rs. '+total);
             $("#buy_stock_submit").removeAttr('disabled');
             $('#qty-validation-msg').addClass('hide');
         }else{
-            $("#total").val(total);
+            $("#total").val('Rs. '+total);
             $("#buy_stock_submit").attr('disabled','disabled');
             $('#qty-validation-msg').removeClass('hide');
         }
@@ -416,7 +415,7 @@
             bid = 0;
         }
 
-        $('#total_bid').val(bid * qty);
+        $('#total_bid').val('Rs. '+(bid * qty));
     }
 
     function check_company_default() {
@@ -451,12 +450,12 @@
         if(qty<=possible_qty){
 //            console.log('Total is :'+total2);
 //            console.log('Balance is :'+<?php echo $player_balance ?>);
-            $("#sell_total").val(total);
+            $("#sell_total").val('Rs. '+total);
 //            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
             $("#sell_submit").removeAttr('disabled');
             $('#sell-qty-validation-msg').addClass('hide');
         }else{
-            $("#sell_total").val(total);
+            $("#sell_total").val('Rs. '+total);
             $("#sell_submit").attr('disabled','disabled');
             $('#sell-qty-validation-msg').removeClass('hide');
         }

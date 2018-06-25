@@ -32,7 +32,7 @@
                                                                     <th>Sector</th>
                                                                     <th>Company</th>
                                                                     <th>Price</th>
-                                                                    <th>Amount</th>
+                                                                    <th>Stock Quantity</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -45,7 +45,7 @@
                                                                         <tr>
                                                                             <td><?php echo $value['company_sector'] ?></td>
                                                                             <td><?php echo $value['company_name'] ?></td>
-                                                                            <td><?php echo $value['price'] ?></td>
+                                                                            <td>Rs. <?php echo $value['price'] ?></td>
                                                                             <td><?php echo $value['quantity'] ?></td>
                                                                         </tr>
                                                                         <?php
