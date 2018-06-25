@@ -160,8 +160,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <!--                <h4 class="modal-title center" id="myModalLabel"><b>Should load all available shares in the market to
-                                        the grid from stock file</b></h4>-->
+                                <h4 class="modal-title center" id="myModalLabel"><b> Buy Shares</b></h4>
             </div>
             <form action="<?php echo base_url('players/stocks/buy/save'); ?>" method="post" class="form-horizontal">
                 <div class="modal-body">
@@ -170,12 +169,12 @@
                             <label class="control-label col-sm-4">Select the Stock</label>
                             <div class="col-sm-8">
                                 <!--<select name="company_stocks_company_stock_id" id="company_stocks_company_stock_id"  class="form-control select-box" data-placeholder="Select Company" title="Select Company" required>-->
-                                <select name="company_stocks_company_stock_id" id="company_stocks_company_stock_id" onchange="check_company_default();" class="form-control select-box" data-placeholder="Select Company" title="Select Company" required>
+                                <select name="company_stocks_company_stock_id" onchange="price_calculation()"  id="company_stocks_company_stock_id" onchange="check_company_default();" class="form-control select-box" data-placeholder="Select Company" title="Select Company" required>
                                     <option value="" selected disabled>Select the Stock</option>
                                     <?php
                                     if (isset($stocks)) {
                                         foreach ($stocks as $row) {
-                                            echo '<option value="' . $row['company_stock_id'] . '" data-price="' . $row['price'] . '" data-default="' . $row['company_default'] . '" data-company="' . $row['company_name'] . '">' . $row['company_name'] . ' | ' . $row['company_stock_name'] . ' | ' . $row['quantity'] . ' | ' . $row['price'] . '</option>';
+                                            echo '<option value="' . $row['company_stock_id'] . '" data-price="' . $row['price'] . '"  data-quantity="' . $row['quantity'] . '" data-default="' . $row['company_default'] . '" data-company="' . $row['company_name'] . '">' . $row['company_name'] . ' | ' . $row['company_stock_name'] . ' | ' . $row['quantity'] . ' | ' . $row['price'] . '</option>';
                                         }
                                     }
                                     ?>
@@ -185,8 +184,14 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4">Quantity to be buying</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="quantity" name="quantity" onchange="price_calculation(this.value)" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();">
+                                <input type="number" class="form-control" id="buy_quantity" name="quantity" onchange="price_calculation()" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();" min="1" value="1">
                             </div>
+                        </div>
+                        <div class="alert alert-primary hide" id="buy-validation-msg">
+                          <strong>You are going to spend more than your current balance</strong>
+                        </div>
+                        <div class="alert alert-primary hide" id="qty-validation-msg">
+                          <strong>You are going to buy more than the quantity available on the stock</strong>
                         </div>
                         <div class="form-group">
                             <label class="control-label bold col-sm-4"><b>Total cost of your Buying is</b></label>
@@ -282,8 +287,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title center" id="myModalLabel"><b> Should load all current shares in hand of the
-                        player from player’s stock file </b></h4>
+                <h4 class="modal-title center" id="myModalLabel"><b> Sell Shares</b></h4>
             </div>
             <form action="<?php echo base_url('players/stocks/sell/save'); ?>" method="post"
                   class="form-horizontal">
@@ -297,7 +301,7 @@
                                     <?php
                                     if (isset($stock_for_sell)) {
                                         foreach ($stock_for_sell as $row) {
-                                            echo '<option value="' . $row['player_stock_id'] . '" data-price="' . $row['price'] . '" data-stock-id="' . $row['company_stocks_company_stock_id'] . '" data-company="' . $row['company_name'] . '">' . $row['company_name'] . ' | ' . $row['company_stock_name'] . ' | ' . $row['quantity'] . ' | ' . $row['price'] . '</option>';
+                                            echo '<option value="' . $row['player_stock_id'] . '" data-price="' . $row['price'] . '"  data-quantity="' . $row['quantity'] . '" data-stock-id="' . $row['company_stocks_company_stock_id'] . '" data-company="' . $row['company_name'] . '">' . $row['company_name'] . ' | ' . $row['company_stock_name'] . ' | ' . $row['quantity'] . ' | ' . $row['price'] . '</option>';
                                         }
                                     }
                                     ?>
@@ -310,6 +314,9 @@
                             <div class="col-sm-8">
                                 <input type="text" id="sell-cost" onkeyup="cal_total_selling();" readonly name="sell-cost" class="form-control">
                             </div>
+                        </div>
+                        <div class="alert alert-primary hide" id="sell-qty-validation-msg">
+                          <strong>You are going to sell more than the quantity available on the stock</strong>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">Quantity to be selling</label>
@@ -325,7 +332,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-3"></div>
-                            <button type="submit" class="btn btn-info">Sell</button>
+                            <button type="submit" class="btn btn-info" id="sell_submit">Sell</button>
                             <button type="button" data-dismiss="modal" class="btn ">Cancel</button>
                         </div>
                     </div>
@@ -361,14 +368,36 @@
         });
     });
 
-    function price_calculation($quantity) {
-        quantity = $quantity;
+    function price_calculation() {
+        quantity = $("#buy_quantity").val();
         price = parseFloat($('#company_stocks_company_stock_id option:selected').data('price'));
+        possible_qty = parseFloat($('#company_stocks_company_stock_id option:selected').data('quantity'));
         total = (parseFloat(quantity * price)).toFixed(2);
-
-        $("#total").val(total);
-        $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
-        $("#buy_stock_submit").removeAttr('disabled');
+        total2 = (quantity * price);
+        if(total2<=<?php echo $player_balance ?>){
+            console.log('Total is :'+total2);
+            console.log('Balance is :'+<?php echo $player_balance ?>);
+            $("#total").val(total);
+            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
+            $("#buy_stock_submit").removeAttr('disabled');
+            $('#buy-validation-msg').addClass('hide');
+        }else{
+            $("#total").val(total);
+            $("#buy_stock_submit").attr('disabled','disabled');
+            $('#buy-validation-msg').removeClass('hide');
+        }
+        if(quantity<=possible_qty){
+//            console.log('Total is :'+total2);
+//            console.log('Balance is :'+<?php echo $player_balance ?>);
+//            $("#total").val(total);
+//            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
+            $("#buy_stock_submit").removeAttr('disabled');
+            $('#qty-validation-msg').addClass('hide');
+        }else{
+            $("#total").val(total);
+            $("#buy_stock_submit").attr('disabled','disabled');
+            $('#qty-validation-msg').removeClass('hide');
+        }
     }
 
     function change_total_cost(element) {
@@ -406,15 +435,32 @@
     }
     
     function cal_total_selling(){
+        id=$('#player_stock_id option:selected').data('stock-id');
         cost=$('#sell-cost').val();
         qty=$('#sell-qty').val();
+//        total = qty*cost;
+        total = (parseFloat(qty * cost)).toFixed(2);
+        
         if (qty == '') {
             qty = 0;
         }
         if (cost == '') {
             cost = 0;
         }
-        $('#sell_total').val(cost*qty);
+        possible_qty = parseFloat($('#player_stock_id option:selected').data('quantity'));
+        if(qty<=possible_qty){
+//            console.log('Total is :'+total2);
+//            console.log('Balance is :'+<?php echo $player_balance ?>);
+            $("#sell_total").val(total);
+//            $('#price').val($('#company_stocks_company_stock_id option:selected').data('price'));
+            $("#sell_submit").removeAttr('disabled');
+            $('#sell-qty-validation-msg').addClass('hide');
+        }else{
+            $("#sell_total").val(total);
+            $("#sell_submit").attr('disabled','disabled');
+            $('#sell-qty-validation-msg').removeClass('hide');
+        }
+//        $('#sell_total').val(cost*qty);
     }
     
     function set_company_id(){
@@ -422,5 +468,7 @@
         cost=$('#player_stock_id option:selected').data('price');
         $('#company_stock_id').val(id);
         $('#sell-cost').val(cost);
+        
+        cal_total_selling();
     }
 </script>
