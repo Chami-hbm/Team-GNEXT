@@ -10,6 +10,9 @@ if(isset($usertype)) {
 }
 ?>
 <script>
+    var timer = new Timer();
+    var turns = 1;
+    var secs = 0;
     $.get("<?php echo base_url() ?>clock/clock-time-getting", function(data) {
             var data = JSON.parse(data);
             if (data.current_clock_value == "00:03:00") {
