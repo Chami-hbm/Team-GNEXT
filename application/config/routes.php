@@ -36,6 +36,9 @@ $route['brokers/view-price-of-stock'] = 'brokers/brokers_historical_price/index'
 //Clock
 $route['clock/new-turn'] = "clock/new_turn";
 $route['clock/reset-turns'] = "clock/reset_turns";
+$route['clock/clock-time-setting/(:any)'] = "clock/clock_time_setting/$1";
+$route['clock/clock-time-getting'] = "clock/clock_time_getting";
+$route['clock/view-player-leaderboard'] = "clock/view_player_leaderboard";
 
 
 

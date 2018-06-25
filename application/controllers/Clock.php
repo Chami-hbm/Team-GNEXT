@@ -21,6 +21,16 @@ class Clock extends CI_controller
         $this->load->view('includes/v_include_footer');
     }
     
+    public function clock_time_setting($time) {
+        $this->m_clock->clock_time_setting($time);
+    }
+
+    public function clock_time_getting() {
+        
+        $data=$this->m_clock->clock_time_getting();
+        echo json_encode($data);
+    }
+    
     public function new_turn() {
         $this->m_clock->increase_turn();
         
@@ -76,6 +86,10 @@ class Clock extends CI_controller
             $value=$positive_value;            
         }
         $this->m_clock->general_trend($value);
+    }
+    
+    public function view_player_leaderboard() {
+        
     }
     
     
