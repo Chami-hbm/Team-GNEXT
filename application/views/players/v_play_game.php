@@ -10,15 +10,16 @@
 //        secs++;
         $.get("<?php echo base_url() ?>clock/clock-time-getting", function(data) {
             var data = JSON.parse(data);
-            if (data.current_clock_value == "00:03:00") {
-                $('#timer').load("<?php echo base_url() ?>clock/view-player-leaderboard"); 
-//                $('#time').val(data.current_clock_value);
-//                $('#turns').val(data.current_turn); 
+            if (data.current_clock_value == "00:15:00") {
+                $('#leaderboard_timer').load("<?php echo base_url() ?>clock/view-player-leaderboard"); 
+                $('#play-game-heading').html('Game Leaderboard');
+                $('.nav_buttons').attr('disabled','disabled');
+                $('#game-over-msg').removeClass('hide'); 
                 
             }else{
-                console.log(data.current_clock_value)
                 $('#time').val(data.current_clock_value);
                 $('#turns').val(data.current_turn);            
+                $('#game-over-msg').addClass('hide'); 
             }  
         });
     });
@@ -50,10 +51,10 @@
                                             <div class="form-group main_div" id="play_game_main_div">
                                                 <div class="panel panel-info">
                                                     <div class="panel-heading">
-                                                        <h4 class="center">Play Game</h4>
+                                                        <h4 class="center" id="play-game-heading">Play Game</h4>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <div class="row">
+                                                        <div class="row" id="leaderboard_timer">
                                                             <div class="col-sm-5">
                                                                 <div class="form-group row">
                                                                     <button type="button" class="btn btn-info col-sm-8"
@@ -73,7 +74,7 @@
                                                                     </button>
                                                                 </div>-->
                                                             </div>
-                                                            <div class="col-sm-7" id="timer">
+                                                            <div class="col-sm-7">
                                                                 <div class="form-group row">
                                                                     <label class="control-label col-sm-3">Time
                                                                         Remaining</label>

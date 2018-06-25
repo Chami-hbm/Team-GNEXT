@@ -9,6 +9,21 @@ if(isset($usertype)) {
     $logout_url = base_url() . 'logout';
 }
 ?>
+<script>
+    $.get("<?php echo base_url() ?>clock/clock-time-getting", function(data) {
+            var data = JSON.parse(data);
+            if (data.current_clock_value == "00:03:00") {
+//                $('#leaderboard_timer').load("<?php echo base_url() ?>clock/view-player-leaderboard"); 
+//                $('#play-game-heading').html('Game Leaderboard');
+                $('.nav_buttons').attr('disabled','disabled');
+                $('#game-over-msg').removeClass('hide'); 
+                
+            }
+    });
+    timer.addEventListener('targetAchieved', function (e) {
+        $('#turns').html('10 Turns completed. Game Over!!');
+    });
+</script>
 <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner" style="background: #a0a0a0;color:#000099">
     
     <div class="logo-area">
