@@ -103,7 +103,7 @@
     $(document).ready(function () {
         $('#user_type_select').on('change', function () {
             const value = this.value;
-            if ($(`form`).is(':visible')) {
+            if ($('form').is(':visible')) {
                 $('form').slideUp('slow', function () {
                     $('#' + value + '-form').slideDown('slow');
                 });
