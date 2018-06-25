@@ -20,6 +20,18 @@ class M_company_stock extends CI_Model {
         $result = $query->result_array();
         return $result;
     }
+
+    function get_stocks_by_broker() {
+        $this->db->select('*');
+        $this->db->from('company_stocks as cs');
+        $this->db->join('users as cp', 'cs.users_user_id = cp.user_id', 'left');
+        $this->db->where('type', 'sell');
+        $this->db->where('users_user_id', $this->session->userdata['user_id']);
+        $this->db->where('cp.company_name !=',NULL);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
     
     function decrease_stock_qty($stock_id, $qty) {
         $this->db->where('company_stock_id', $stock_id);
@@ -89,6 +101,20 @@ class M_company_stock extends CI_Model {
 //        }
         
         return $result;
+    }
+    
+    public function save_stock($data) {
+        if (isset($data['company_stock_id'])) {
+            $this->db->where('company_stock_id', $data['company_stock_id']);
+            $this->db->update('company_stocks', $data);
+        } else {
+            $this->db->insert('company_stocks', $data);
+        }
+    }
+    
+    public function company_stock_delete($company_stock_id) {
+        $this->db->where('company_stock_id', $company_stock_id);
+        $this->db->delete('company_stocks');
     }
 
 
