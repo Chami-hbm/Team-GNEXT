@@ -11,6 +11,8 @@ class Brokers_historical_price extends User_controller{
             'title' => 'Broker | Historical Price of Shares - ' . $this->config->item('site_name'),
             'usertype' => "brokers",
         );
+        $this->load->model('m_user');
+        $this->load->model('m_company_stock');
     }
     
     public function index(){
@@ -21,8 +23,15 @@ class Brokers_historical_price extends User_controller{
         $data['header'] = $this->load->view('template/a_vheader', $data, TRUE);
         $data['footer'] = $this->load->view('template/a_vfooter', NULL, TRUE);
 
+        $data['brokers']=  $this->m_user->get_all_companies();
+        
         $this->load->view('includes/v_include_header', $data);
         $this->load->view('brokers/v_broker_historical_price');
         $this->load->view('includes/v_include_footer');
     }   
+    
+    public function get_comparison_table($data1,$type) {
+        $data['details'] = $this->m_company_stock->get_table_for_player_stock($data1,$type);
+        $this->load->view('brokers/loading_pages/v_historical_price_table', $data);
+    }
 }

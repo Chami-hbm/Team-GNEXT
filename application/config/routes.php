@@ -31,6 +31,7 @@ $route['brokers/players-transactions'] = 'brokers/brokers_transactions/index';
 $route['brokers/players-transactions/list/(:any)'] = 'brokers/brokers_transactions/transaction_player_list/$1';
 $route['brokers/stock-management'] = 'brokers/brokers_stock/index';
 $route['brokers/view-price-of-stock'] = 'brokers/brokers_historical_price/index';
+$route['brokers/view-price-of-stock/list/(:any)/(:any)'] = 'brokers/brokers_historical_price/get_comparison_table/$1/$2';
 
 $route['brokers/stock-management/save'] = 'brokers/brokers_stock/save_stock';
 $route['brokers/stock-management/delete'] = 'brokers/brokers_stock/company_stock_delete';
