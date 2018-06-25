@@ -39,12 +39,23 @@ class M_clock extends CI_Model {
             $stock_set = $query->result_array();
             
             foreach ($stock_set as $row2) {
+                if(($row2['price']+($value))<0){
+                    $new_value=0;                    
+                }else{
+                    $new_value=$row2['price']+($value);
+                }
                 $data = array(
                         'previous_price' => $row2['price'],
-                        'price' => $row2['price']+($value),
+                        'price' => $new_value,
                 );                
                 $this->db->where('company_stock_id', $row2['company_stock_id']);
                 $this->db->update('company_stocks', $data);
+                
+                $data2 = array(
+                        'price' => $new_value,
+                );                
+                $this->db->where('company_stocks_company_stock_id', $row2['company_stock_id']);
+                $this->db->update('player_stocks', $data2);
             }
         }
     }
@@ -63,12 +74,22 @@ class M_clock extends CI_Model {
             }else{
                 $value=$positive_value;            
             }
-            
+            if(($row['price']+($value))<0){
+                $new_value=0;                    
+            }else{
+                $new_value=$row['price']+($value);
+            }
             $data = array(
-                    'price' => $row['price']+($value),
+                    'price' => $new_value,
             );                
             $this->db->where('company_stock_id', $row['company_stock_id']);
             $this->db->update('company_stocks', $data);
+            
+            $data2 = array(
+                    'price' => $new_value,
+            );                
+            $this->db->where('company_stocks_company_stock_id', $row['company_stock_id']);
+            $this->db->update('player_stocks', $data2);
         }
     }
 
@@ -79,11 +100,22 @@ class M_clock extends CI_Model {
         $stock_set = $query->result_array();
 
         foreach ($stock_set as $row) {
+            if(($row['price']+($value))<0){
+                $new_value=0;                    
+            }else{
+                $new_value=$row['price']+($value);
+            }
             $data = array(
-                    'price' => $row['price']+($value),
+                    'price' => $new_value,
             );                
             $this->db->where('company_stock_id', $row['company_stock_id']);
             $this->db->update('company_stocks', $data);
+            
+            $data2 = array(
+                    'price' => $new_value,
+            );                
+            $this->db->where('company_stocks_company_stock_id', $row['company_stock_id']);
+            $this->db->update('player_stocks', $data2);
         }
     }
     
@@ -94,11 +126,22 @@ class M_clock extends CI_Model {
         $stock_set = $query->result_array();
 
         foreach ($stock_set as $row) {
+            if(($row['price']+($value))<0){
+                $new_value=0;                    
+            }else{
+                $new_value=$row['price']+($value);
+            }
             $data = array(
-                    'price' => $row['price']+($value),
+                    'price' => $new_value,
             );                
             $this->db->where('company_stock_id', $row['company_stock_id']);
             $this->db->update('company_stocks', $data);
+            
+            $data2 = array(
+                    'price' => $new_value,
+            );                
+            $this->db->where('company_stocks_company_stock_id', $row['company_stock_id']);
+            $this->db->update('player_stocks', $data2);
         }
     }
 }
