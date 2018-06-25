@@ -89,7 +89,10 @@ class Clock extends CI_controller
     }
     
     public function view_player_leaderboard() {
+        $data = $this->data;
+        $data['players'] = $this->m_clock->get_all_players();
         
+        $this->load->view('players/loading_pages/v_player_leaderboard',$data);
     }
     
     
