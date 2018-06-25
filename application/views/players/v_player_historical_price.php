@@ -27,8 +27,8 @@
 
                                                     <div class="panel-body">
                                                         <form action="">
-                                                            <p>Hello <?php echo $this->session->userdata('name')
-                                                                ?></p>
+<!--                                                            <p>Hello <?php // echo $this->session->userdata('name')
+                                                                ?></p>-->
                                                             <div class="form-group row">
                                                                 <label class="control-label col-sm-3">Sector</label>
                                                                 <div class="col-sm-9">
@@ -70,7 +70,7 @@
                                                                     <button type="button" class="btn btn-info btn-lg"
                                                                             data-toggle="modal"
                                                                             data-target="#comparision" onclick="get_table();">
-                                                                        View Comparision
+                                                                        View Comparison
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -126,7 +126,7 @@
         <div  class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Comparision of Selected Company</h4>
+                <h4 class="modal-title" id="myModalLabel">Comparison of Selected Company</h4>
             </div>
             <div class="modal-body" id="table-div">
                 

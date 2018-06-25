@@ -57,8 +57,8 @@
                                                                 ?>
                                                                 <tr>
                                                                     <td colspan="2"><strong>Total</strong></td>
-                                                                    <td><?php echo $tot; ?></td>
-                                                                    <td><?php echo $price; ?></td>
+                                                                    <td>Rs. <?php echo $price; ?></td>
+                                                                    <td>Rs. <?php echo $tot; ?></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

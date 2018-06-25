@@ -30,7 +30,7 @@
 
                                                             <div class="row">
                                                                 <div class="col-sm-12 text-center">
-                                                                    <button type="button" class="btn btn-primary btn-lg"
+                                                                    <button type="button" class="btn btn-info btn-lg"
                                                                             data-toggle="modal"
                                                                             data-target="#add_stock">
                                                                         Add Stock

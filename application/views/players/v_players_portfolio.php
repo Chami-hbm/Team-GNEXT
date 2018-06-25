@@ -56,7 +56,7 @@
                                                                 ?>
                                                                 <tr>
                                                                     <td colspan="2"><strong>Total</strong></td>
-                                                                    <td><?php echo $price_tot; ?></td>
+                                                                    <td>Rs. <?php echo $price_tot; ?></td>
                                                                     <td><?php echo $qty_tot; ?></td>
                                                                 </tr>
                                                             </tbody>
