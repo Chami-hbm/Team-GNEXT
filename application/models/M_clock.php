@@ -156,4 +156,23 @@ class M_clock extends CI_Model {
             $this->db->update('player_stocks', $data2);
         }
     }
+    
+        
+    public function get_stock_for_sell() {
+        $user=  $this->session->userdata['user_id'];
+        
+        $this->db->select('p.player_stock_id,p.quantity,p.price,c.company_stock_name,u.company_name,p.company_stocks_company_stock_id');
+        $this->db->select_sum('(p.price*p.quantity)','total_value');
+        $this->db->from('player_stocks as p');
+        $this->db->join('company_stocks as c','c.company_stock_id=p.company_stocks_company_stock_id');
+        $this->db->join('users as u','u.user_id=c.users_user_id');
+        $this->db->where('p.users_user_id',$user);
+        $result=$this->db->get()->result_array();
+        return $result;
+    }
+    
+    public function get_all_players() {
+        $this->db->where('user_type','players');
+        return $this->db->get('users')->result_array();
+    }
 }
