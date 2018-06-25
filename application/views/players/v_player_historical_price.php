@@ -67,7 +67,7 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6">
-                                                                    <button type="button" class="btn btn-primary btn-lg"
+                                                                    <button type="button" class="btn btn-info btn-lg"
                                                                             data-toggle="modal"
                                                                             data-target="#comparision" onclick="get_table();">
                                                                         View Comparision
