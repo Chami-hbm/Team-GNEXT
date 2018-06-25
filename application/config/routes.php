@@ -32,6 +32,8 @@ $route['brokers/players-transactions/list/(:any)'] = 'brokers/brokers_transactio
 $route['brokers/stock-management'] = 'brokers/brokers_stock/index';
 $route['brokers/view-price-of-stock'] = 'brokers/brokers_historical_price/index';
 
+$route['brokers/stock-management/save'] = 'brokers/brokers_stock/save_stock';
+$route['brokers/stock-management/delete'] = 'brokers/brokers_stock/company_stock_delete';
 
 //Clock
 $route['clock/new-turn'] = "clock/new_turn";
