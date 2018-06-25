@@ -3,7 +3,7 @@
     var timer = new Timer();
     var turns = 1;
     var secs = 0;
-    timer.start({precision: 'seconds', startValues: {seconds: 0}, target: {seconds: 900}});
+    timer.start({precision: 'seconds', startValues: {seconds: 0}, target: {seconds: 1500}});
     $('#time').html(timer.getTimeValues().toString());
 //    $.get("<?php echo base_url() ?>clock/reset-turns", function() {});
     timer.addEventListener('secondsUpdated', function (e) {
