@@ -13,6 +13,18 @@ class M_clock extends CI_Model {
         return $this->db->get('clock')->result_array()[0]['current_turn'];
     }
     
+    public function clock_time_setting($time) {
+        $data = array(
+                'current_clock_value' => $time,
+        );
+        $this->db->where('clock_id', 1);
+        $this->db->update('clock', $data);
+    }
+    
+    function clock_time_getting() {
+        return $this->db->get('clock')->result_array()[0];
+    }
+    
     public function increase_turn() {
         $this->db->set('current_turn', 'current_turn+1', FALSE);
         $this->db->where('clock_id', 1);
