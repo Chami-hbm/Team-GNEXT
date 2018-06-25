@@ -62,7 +62,6 @@ class Home extends CI_controller
         
         if ($user_data['user_type'] === 'players') {
             $user_data['player_type'] = $this->input->post('player_type');
-            $user_data['current_balance'] = $this->input->post('initial_balance');
         } elseif ($user_data['user_type'] === 'brokers') {
             $user_data['user_id'] = $this->input->post('company');
         }
