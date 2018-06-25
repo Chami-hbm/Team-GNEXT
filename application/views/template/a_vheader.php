@@ -9,14 +9,15 @@ if(isset($usertype)) {
     $logout_url = base_url() . 'logout';
 }
 ?>
-<header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">
+<header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner" style="background: #a0a0a0;color:#000099">
     
     <div class="logo-area">
         <a class="navbar-brand navbar-brand-info" href="<?php echo $dashboard_url; ?>">
             <img class="show-on-collapse img-logo-white" alt="Paper" src="<?php echo base_url(); ?>assets/img/logo-icon-white.png">
             <img class="show-on-collapse img-logo-dark" alt="Paper" src="<?php echo base_url(); ?>assets/img/logo-icon-dark.png">
-            <!--		    <img class="img-white" alt="Paper" src="--><?php //echo base_url(); ?><!--assets/img/logo-white.png">-->
-            <h3 class="text-center"><?php echo $usertype; ?></h3>
+            <img class="img-white" alt="Paper" src="<?php echo base_url(); ?>assets/img/gnext-logo.png" style="width: 100px;height: auto;margin-top: 10px;">
+            
+            <img src="<?php echo base_url(); ?>assets/img/gnext-logo.png" class="img-responsive"/>
             <img class="img-dark" alt="Paper" src="<?php echo base_url(); ?>assets/img/logo-dark.png">
             <!--<img src="<?php echo base_url(); ?>assets/img/gnext-logo.png" class="img-responsive"/>-->
         </a>
@@ -25,13 +26,14 @@ if(isset($usertype)) {
 //        if(isset($type_of_page)) {
 //            if($type_of_page != 'designers') {
                 ?>
-<!--            <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg stay-on-search">
-                <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
+            <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg stay-on-search">
+                <h2 style="width: 500px;margin-left: 20px">Hello, <?php echo $this->session->userdata['name'] ?></h2>
+<!--                <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
                     <span class="icon-bg">
                         <i class="material-icons">menu</i>
                     </span>
-                <div class="ripple-container"></div></a>
-            </span>-->
+                <div class="ripple-container"></div></a>-->
+            </span>
         <?php // }
 //        }
         ?>

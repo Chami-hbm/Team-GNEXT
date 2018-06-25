@@ -39,11 +39,11 @@
                                                                             class="btn btn-info col-sm-8">Sell Stock
                                                                     </button>
                                                                 </div>
-                                                                <div class="form-group row">
+<!--                                                                <div class="form-group row">
                                                                     <button type="button" class="btn btn-info col-sm-8">
                                                                         Get Analyst<br/>Recommendation
                                                                     </button>
-                                                                </div>
+                                                                </div>-->
                                                             </div>
                                                             <div class="col-sm-7">
                                                                 <div class="form-group row">
