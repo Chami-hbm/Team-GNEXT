@@ -83,9 +83,6 @@
                         <div class="form-group">
                             <input type="password" title="Password" name="password_confirm" id="password_confirm" class="form-control" placeholder="Confirm your password" data-parsley-equalto="#p-password" required>
                         </div>
-                        <div class="form-group">
-                            <input type="number" name="initial_balance" id="initial_balance" placeholder="Enter your initial balance" title="Initial Balance" class="form-control">
-                        </div>
 
                         <input type="submit" class="btn btn-primary btn-raised pull-right" value="Register" style="background-color: #0066cc;"/>
 
