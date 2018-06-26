@@ -28,14 +28,14 @@
                                                     <div class="panel-body">
                                                         <form action="">
 <!--                                                            <p>Hello <?php // echo $this->session->userdata('name')
-                                                                ?></p>-->
+                                            ?></p>-->
                                                             <div class="form-group row">
                                                                 <label class="control-label col-sm-3">Sector</label>
                                                                 <div class="col-sm-9">
                                                                     <select name="sector" id="sector"
                                                                             class="form-control select-box"
                                                                             title="Sector" data-placeholder="Select the
-                                                                             sector">
+                                                                            sector" onchange="change_company_by_sector(this);">
                                                                         <option></option>
                                                                         <option value="IT">IT</option>
                                                                         <option value="Finance">Finance</option>
@@ -47,22 +47,24 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="control-label col-sm-3">Company</label>
-                                                                <div class="col-sm-9">
-                                                                    <select name="company" id="company"
-                                                                            class="form-control select-box"
-                                                                            title="Company" data-placeholder="Select the
-                                                                             company">
-                                                                        <option></option>
-                                                                        <?php
-                                                                        if($companies){
-                                                                            foreach ($companies as $value) {
-                                                                                
-                                                                        ?>
-                                                                        <option value="<?php echo $value['user_id']; ?>"><?php echo $value['company_name']; ?></option>
-                                                                        <?php
-                                                                        }}
-                                                                        ?>
-                                                                    </select>
+                                                                <div  id="select-div">
+                                                                    <div class="col-sm-9">
+                                                                        <select name="company" id="company"
+                                                                                class="form-control select-box"
+                                                                                title="Company" data-placeholder="Select the
+                                                                                company">
+                                                                            <option></option>
+                                                                            <?php
+                                                                            if ($companies) {
+                                                                                foreach ($companies as $value) {
+                                                                                    ?>
+                                                                                    <option value="<?php echo $value['user_id']; ?>"><?php echo $value['company_name']; ?></option>
+                                                                                    <?php
+                                                                                }
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -87,7 +89,7 @@
 
                 </div> <!-- #page-content -->
             </div>
-            
+
             <?php echo $footer; ?>
         </div>
     </div>
@@ -105,12 +107,12 @@
             <div class="modal-body">
                 <table class="table-hover table table-bordered table-striped">
                     <thead>
-                    <tr class="alert-info">
-                        <td>Sector</td>
-                        <td>Company</td>
-                        <td>Price</td>
-                        <td>Qty</td>
-                    </tr>
+                        <tr class="alert-info">
+                            <td>Sector</td>
+                            <td>Company</td>
+                            <td>Price</td>
+                            <td>Qty</td>
+                        </tr>
                     </thead>
                 </table>
             </div>
@@ -129,7 +131,7 @@
                 <h4 class="modal-title" id="myModalLabel">Comparison of Selected Company</h4>
             </div>
             <div class="modal-body" id="table-div">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -138,21 +140,29 @@
     </div>
 </div>
 <script>
-    function get_table(){
-        company=$('#company').val();
-        sector=$('#sector').val();
-        if(company != ''){
-            type='company';
-            value=company;
-        }else if(sector != ''){
-            type='sector1';
-            value=sector;
-        }else{
-            type='all';
-            value='none';
+    
+    function get_table() {
+        company = $('#company').val();
+        sector = $('#sector').val();
+        if (company != '') {
+            type = 'company';
+            value = company;
+        } else if (sector != '') {
+            type = 'sector1';
+            value = sector;
+        } else {
+            type = 'all';
+            value = 'none';
         }
         console.log(value);
         console.log(type);
-        $('#table-div').load(base_url+'players/view-current-historical-price-shares/list/'+value+'/'+type);
+        $('#table-div').load(base_url + 'players/view-current-historical-price-shares/list/' + value + '/' + type);
+    }
+
+    function change_company_by_sector(vall) {
+        sector = $(vall).val();
+
+        $('#select-div').load(base_url + 'players/view-current-historical-price-shares/select-box/' + sector);
+        
     }
 </script>
