@@ -60,4 +60,8 @@ class M_user extends CI_Model {
         $this->db->where('user_type','players');
         return $this->db->get('users')->result_array();
     }
+    public function get_companies_by_sector($sector) {
+        $this->db->where('company_sector',$sector);
+        return $this->db->get('users')->result_array();
+    }
 }

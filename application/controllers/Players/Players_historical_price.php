@@ -35,4 +35,9 @@ class Players_historical_price extends User_controller{
         $data['details'] = $this->m_company_stock->get_table_for_player_stock($value,$type);
         $this->load->view('players/loading_pages/v_historical_price_table', $data);
     }
+    
+    public function load_select_box($sector) {
+        $data['companies']=  $this->m_user->get_companies_by_sector($sector);
+        $this->load->view('players/loading_pages/v_historical_company_list', $data);
+    }
 }
