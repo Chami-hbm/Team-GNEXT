@@ -489,59 +489,13 @@ $config['global_xss_filtering'] = FALSE;
   | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
  */
 
-$config['csrf_protection'] = TRUE;
-$config['csrf_token_name'] = 'angeladscsrftoken';
-$config['csrf_cookie_name'] = 'angeladscsrfcoockie';
+$config['csrf_protection'] = FALSE;
+$config['csrf_token_name'] = 'csrftoken';
+$config['csrf_cookie_name'] = 'csrfcoockie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
-    'player/inventory/items/get-price',
-    'player/inventory/invoice/item-with-barcode',
-    'player/inventory/customers/update',
-    'player/inventory/suppliers/ajax-add',
-    'player/inventory/items/ajax-save-items',
-    'player/inventory/branches/ajax-save',
-    'player/system/player_product/add_product',
-    'player/system/player_product/update_product',
-    'player/inventory/pos/save_new_order',
-    'player/inventory/invoice/update_order',
-    'player/inventory/items/categories/ajax-add',
-    'player/inventory/items/sub-categories/ajax-add',
-    'player/inventory/customers/ajax-add',
-    'player/inventory/reports/item-summary',
-    'player/inventory/expenses/get-expenses-by-date-range',
-    'designers/update-ongoing-to-complete',
-    'api/designers/login',
-    'api/designers/assign-job',
-    'api/designers/artwork-complete',
-    'api/designers/send-to-print',
-    'api/designers/send-to-workshop',
-    'api/designers/send-to-indoor',
-    'api/designers/send-to-outdoor',
-    'api/designers/all-completed',
-    'api/cashier/save-job-note',
-    'api/designers/customer-approval',
-    'api/designers/get-complete-job-items/(:any)',
-    'api/printers/login',
-    'api/printers/set-item-received',
-    'api/printers/set-item-printed',
-    'api/workshop/login',
-    'api/workshop/set-item-received',
-    'api/workshop/set-item-printed',
-    'api/indoor/login',
-    'api/indoor/set-item-printed',
-    'api/outdoor/login',
-    'api/outdoor/set-item-printed',
-    'player/inventory/items/add-items/multiple',
-    'player/job-notes/item-wastage/calculation',
-    'player/job-notes/other-item-wastage/calculation',
-    'designers/job-notes/item-wastage/calculation',
-    'designers/job-notes/other-item-wastage/calculation',
-    'designers/job-note/save',
-    'designer/job-notes/item-wastage/calculation',
-    'designer/job-notes/other-item-wastage/calculation',
-    'designer/job-note/update',
-    'api/designers/cancel-job',
+    'register/save',
     'player/inventory/task/complete/(:num)',
     'player/inventory/task/delete/(:num)',
 );
