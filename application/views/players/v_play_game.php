@@ -198,7 +198,7 @@
                             <label class="control-label col-sm-4">Select the Stock</label>
                             <div class="col-sm-8">
                                 <!--<select name="company_stocks_company_stock_id" id="company_stocks_company_stock_id"  class="form-control select-box" data-placeholder="Select Company" title="Select Company" required>-->
-                                <select name="company_stocks_company_stock_id" onchange="price_calculation()"  id="company_stocks_company_stock_id" onchange="check_company_default();" class="form-control select-box" data-placeholder="Select Company" title="Select Company" required>
+                                <select name="company_stocks_company_stock_id" id="company_stocks_company_stock_id" onchange="check_company_default();" class="form-control select-box" data-placeholder="Select Company" title="Select Company" required>
                                     <option value="" selected disabled>Select the Stock</option>
                                     <?php
                                     if (isset($stocks)) {
@@ -448,7 +448,9 @@
     }
 
     function check_company_default() {
+        console.log("inside");
         status = $('#company_stocks_company_stock_id option:selected').data('default');
+        console.log(status);
         company = $('#company_stocks_company_stock_id option:selected').data('company');
         price = $('#company_stocks_company_stock_id option:selected').data('price');
         stock = $('#company_stocks_company_stock_id').val();
@@ -459,6 +461,8 @@
             $('#share_point').val(price);
             $('#bid').attr('min', price);
             $('#stock_id_bid').val(stock);
+        }else{
+            price_calculation();
         }
     }
     
